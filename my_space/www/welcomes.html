@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{ title|e }}</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/my_space/images/my-space-check.svg">
+  <script>window._version_number = {{ my_space_build_version | tojson }};</script>
+  {{ include_style('website.bundle.css') }}
+  <link rel="stylesheet" href="{{ factory_assets.login_css if factory_assets else '/assets/flow/css/factory_login.css' }}">
+  <link rel="stylesheet" href="{{ factory_assets.welcome_css if factory_assets else '/assets/flow/css/factory_welcome.css' }}">
+  <link rel="stylesheet" href="{{ factory_assets.theme_css if factory_assets else '/assets/flow/css/factory_theme.css' }}">
+  <style>
+    .welcome-content {min-width:0;}
+    #panel-approvals[hidden] {display:none;}
+  </style>
+  <link rel="stylesheet" href="{{ my_space_assets.approvals_css }}">
+  <link rel="stylesheet" href="{{ my_space_assets.review_css }}">
+  <link rel="stylesheet" href="{{ my_space_assets.welcome_css }}">
+  <link rel="stylesheet" href="{{ my_space_assets.process_css }}">
+</head>
+<body class="welcome-page" data-theme="{{ flow_theme|e }}" data-palette="{{ flow_palette|e }}" data-timezone="{{ plant_timezone|e }}" data-user="{{ profile.username|e }}" data-today="{{ my_space_today|default('')|e }}">
+  <header class="welcome-topbar">
+    <a href="{{ redirect_to|e }}" class="welcome-brand"><span aria-hidden="true">▥</span> {{ company|e }} <small>EMPLOYEE WELCOME</small></a>
+    <div class="welcome-header-actions"><button type="button" class="factory-theme-toggle" id="factory-theme-toggle" aria-label="Switch to dark theme">Dark mode</button><button type="button" id="reduce-animation" aria-pressed="false">Reduce animation</button><time id="welcome-clock"></time><span>{{ plant_timezone|e }}</span><button type="button" id="welcome-signout">Sign out</button></div>
+  </header>
+  <main class="welcome-shell">
+    <section class="welcome-heading"><div><p class="welcome-eyebrow">IDENTITY VERIFIED <span aria-hidden="true">✓</span></p><h1 tabindex="-1" id="welcome-title">Welcome, {{ profile.name|e }}.</h1><p>Your people, your shift, your next move.</p></div><a class="welcome-enter" href="{{ redirect_to|e }}" target="_blank" rel="noopener">Enter ERPNext <span aria-hidden="true">↗</span></a></section>
+    <section class="welcome-session-strip" aria-label="Login and attendance">
+      <div><span>YOU SIGNED IN</span><strong id="session-login-time">{{ profile.login_at|e }}</strong><small>{{ plant_timezone|e }}</small>      <p id="attendance-state" role="status">{{ (profile.attendance_status or "No gate event recorded")|e }}</p><small>{{ (profile.employee.branch if profile.employee and profile.employee.branch else "Branch not assigned")|e }} · Latest check-in/out event, not finalized attendance.</small><p id="checkin-action-status" role="status" hidden></p>{% if profile.punch_warning %}<p class="punch-warning" id="punch-warning" role="status">{{ profile.punch_warning|e }} <button type="button" data-today-checkins>Review timeline</button></p>{% endif %}</div>
+      <div class="welcome-checkin-action">{% if profile.can_checkin %}<button type="button" id="mark-employee-checkin" data-requires-location="{{ 'true' if profile.requires_location else 'false' }}">Mark my employee check-in <span aria-hidden="true">✓</span></button><button type="button" id="mark-employee-checkout">Check out</button><button type="button" data-today-checkins>Today’s IN / OUT</button><button type="button" id="check-location">Check location readiness</button><p id="location-readiness" role="status">Location not checked yet.</p><small>Every submission records a new event. Signing in alone does not mark attendance.</small>{% else %}<small>Check-in is available when an active employee and HRMS attendance are configured.</small>{% endif %}</div>
+
+    </section>
+    <div class="welcome-layout">
+      <aside class="welcome-guide" data-side-tab="team" aria-label="Your pass and welcome guide" hidden>
+        <div class="guide-lamp" aria-hidden="true"></div>
+                  <div class="personal-pass employee-id-card" aria-label="Your employee ID card"><div class="id-card-slot" aria-hidden="true"></div>
+            <div class="id-company">{% if profile.company_logo %}<img id="company-logo" src="{{ profile.company_logo|e }}" alt="Company logo" referrerpolicy="no-referrer">{% endif %}<strong>{{ (profile.company_name or company)|e }}</strong></div><div class="pass-topline"><span>FACTORY PERSONNEL PASS</span><span class="verified-pill">✓ Verified account</span></div>
+            <div class="pass-person"><div class="welcome-avatar"><span>{{ profile.initials|e }}</span>{% if profile.photo %}<img src="{{ profile.photo|e }}" alt="Your profile photo" id="welcome-photo" referrerpolicy="no-referrer">{% endif %}</div><div><h2>{{ profile.name|e }}</h2><p>{{ (profile.employee.designation if profile.employee and profile.employee.designation else 'ERPNext user')|e }}</p><small>{{ profile.username|e }}</small></div></div>
+            <dl class="pass-fields"><div><dt>Employee ID</dt><dd>{{ (profile.employee.name if profile.employee else 'No employee linked')|e }}</dd></div><div><dt>Department</dt><dd>{{ (profile.employee.department if profile.employee and profile.employee.department else "Not assigned")|e }}</dd></div></dl>
+            <div class="pass-bottom"><span>{{ (profile.employee.branch if profile.employee and profile.employee.branch else "Branch not assigned")|e }}</span><span aria-hidden="true">▥ ▥ ▥ ▥</span></div>
+          </div>
+<div class="guide-copy"><p id="guide-caption">Your pass is ready.</p></div>
+        {% include "templates/includes/factory_supervisor.html" %}
+        <div class="guide-walkway" aria-hidden="true"><i>01</i><i>02</i><i>03</i></div>
+        <p class="guide-hint">Click Marcus for a little encouragement.</p>
+      </aside>
+      <aside id="workspace-modules-side" class="id-themed-side" data-side-tab="profile" aria-label="Workspace modules"><div class="id-side-slot" aria-hidden="true"></div>
+        <section class="your-work"><h3>Modules</h3><p class="work-permission-hint">All document types available to your account, grouped by module.</p><label class="module-search-label" for="workspace-module-search">Find a module or document</label><input id="workspace-module-search" type="search" placeholder="Search modules and documents…" autocomplete="off"><div class="work-links">
+          {% for module in profile.modules %}<article class="work-module module-group-card" data-module="module:{{ module.key|e }}"><button class="pin-module" type="button" aria-pressed="false" aria-label="Pin {{ module.label|e }}">☆ Pin</button><details class="module-group"><summary><strong>{{ module.label|e }}</strong><small>{{ module.links|length }} document {{ 'type' if module.links|length == 1 else 'types' }}</small></summary><div class="module-document-links">{% for link in module.links %}<a href="{{ link.url|e }}" target="_blank" rel="noopener">{{ link.label|e }} <span aria-hidden="true">↗</span></a>{% endfor %}</div></details></article>{% else %}<p class="welcome-empty">No modules are available for your current permissions.</p>{% endfor %}
+        </div><p id="workspace-module-search-empty" class="welcome-empty" hidden>No matching modules or documents.</p></section>
+      </aside>
+      <aside id="attendance-shift-side" class="id-themed-side" data-side-tab="work" aria-label="Your shift" hidden><div class="id-side-slot" aria-hidden="true"></div>          <div class="shift-pass"><div><span class="welcome-eyebrow">YOUR SCHEDULE</span><h2>{{ (profile.shift.name if profile.shift else 'No shift to show')|e }}</h2><p>{{ profile.shift_status|e }}</p></div><span class="shift-clock-icon" aria-hidden="true">◷</span>{% if profile.shift %}<div class="shift-times"><span><small>START</small>{{ profile.shift.start|e }}</span><span aria-hidden="true">→</span><span><small>END</small>{{ profile.shift.end|e }}</span></div>{% endif %}<p class="shift-zone">Times shown in {{ plant_timezone|e }}. A schedule does not confirm attendance.</p></div>
+</aside>
+      <aside id="my-space-review-slot" class="msa-app" data-side-tab="approvals" aria-label="Approval controls" hidden></aside>
+      <div class="welcome-content">
+        <nav class="welcome-tabs" id="welcome-tabs" role="tablist" aria-label="Your welcome tour">
+          <button id="tab-profile" role="tab" aria-selected="true" aria-controls="panel-profile" data-tab="profile"><b>01</b> My workspace</button>
+          <button id="tab-team" role="tab" aria-selected="false" aria-controls="panel-team" tabindex="-1" data-tab="team"><b>02</b> Your team</button>
+          <button id="tab-work" role="tab" aria-selected="false" aria-controls="panel-work" tabindex="-1" data-tab="work"><b>03</b> Shift &amp; attendance</button>
+          <button id="tab-approvals" role="tab" aria-selected="false" aria-controls="panel-approvals" tabindex="-1" data-tab="approvals"><b>04</b> Document Center {% if profile.approvals %}<span class="approval-badge" aria-label="{{ profile.approval_count_label|e }} pending workflow actions">{{ profile.approval_count_label|e }}</span>{% endif %}</button>
+          <button id="tab-process" role="tab" aria-selected="false" aria-controls="panel-process" tabindex="-1" data-tab="process"><b>05</b> Business Flow</button>
+        </nav>
+        <section id="panel-profile" class="welcome-panel" role="tabpanel" aria-labelledby="tab-profile" tabindex="0">
+          <div class="workspace-intro"><span class="welcome-eyebrow">READY FOR YOUR DAY</span><h2>My workspace</h2><p>Pick up where you left off, or start something new.</p></div>
+          <section class="workspace-block workspace-entry" aria-label="Create a document"><div class="workspace-section-head"><h3>Create a document</h3><small>Save a draft for review</small></div><div class="workspace-entry-grid">{% for link in profile.entry_links %}<article class="workspace-entry-card"><a class="workspace-action" href="{{ link.create_url|e }}"><span class="workspace-action-icon" aria-hidden="true">+</span><span>Create {{ link.label|e }}</span><span aria-hidden="true">→</span></a><a class="workspace-entry-list" href="{{ link.url|e }}" target="_blank" rel="noopener">View {{ link.label|e }} list ↗</a></article>{% else %}<p class="welcome-empty">No document creation permissions are available for this account.</p>{% endfor %}</div></section>
+
+
+          <section class="workspace-block" aria-label="Continue working"><div class="workspace-section-head"><h3>Continue working</h3><small>Your recent drafts, including invoices</small></div><ul class="workspace-recent">{% for item in profile.workspace_recent %}<li><a href="{{ item.url|e }}"><span>{{ item.title|e }}</span><span aria-hidden="true">↗</span></a></li>{% else %}<li class="welcome-empty">No recent drafts created by you.</li>{% endfor %}</ul></section>
+
+          <section class="your-assignments"><h3>My open assignments <small>Up to 5</small></h3><ul>{% for task in profile.tasks %}<li class="assignment-row"><div><strong>{{ task.title|e }}</strong><small><span class="assignment-priority">{{ (task.priority or "Normal")|e }} priority</span>{% if task.due %}<span class="assignment-due">Due {{ task.due|e }}</span>{% endif %}</small></div><a class="assignment-open" href="{{ task.url|e }}">Open task ↗</a></li>{% else %}<li class="welcome-empty">{{ profile.tasks_status|e }}</li>{% endfor %}</ul></section>
+
+          <details class="workspace-access"><summary>Access &amp; permissions <span aria-hidden="true">⌄</span></summary><p>Roles assigned to your ERPNext account.</p><div class="role-chips">{% for role in profile.roles %}<span>{{ role|e }}</span>{% else %}<span>No additional roles assigned</span>{% endfor %}</div></details>
+          {% if not profile.employee %}<p class="welcome-empty">Your account is verified, but no active employee record is linked. Your administrator can connect it to show your branch and shift.</p>{% endif %}
+          <button class="welcome-next" data-next="team">Meet your team <span aria-hidden="true">→</span></button>
+        </section>
+        <section id="panel-team" class="welcome-panel" role="tabpanel" aria-labelledby="tab-team" tabindex="0" hidden>
+          <div class="panel-intro"><span class="welcome-eyebrow">WHERE YOU BELONG</span><h2>Your corner of the factory.</h2><p>Your employee record connects your role to your team.</p></div>
+          <div class="team-map">
+            {% for field, label, icon in [('company','Company','▥'),('branch','Branch','⌂'),('department','Department','◈'),('designation','Designation','◎'),('reports_to','Reports to · employee ID','↗'),('employment_type','Employment type','◇')] %}
+            <article class="team-tile"><span class="team-icon" aria-hidden="true">{{ icon }}</span><div><h3>{{ label|e }}</h3><p>{{ (profile.employee.get(field) if profile.employee and profile.employee.get(field) else 'Not assigned')|e }}</p></div></article>
+            {% endfor %}
+          </div>
+          <section class="workspace-block team-reports" aria-label="Employees reporting to you">
+            <div class="workspace-section-head"><h3>Employees reporting to you</h3><small>{{ profile.direct_reports|length }}{{ '+' if profile.direct_reports_more else '' }} active</small></div>
+            <p class="team-reports-hint">Employees whose Reports To is your employee record.</p>
+            {% if profile.direct_reports %}<div class="team-reports-table"><table><thead><tr><th>Employee</th><th>Designation</th><th>Department</th></tr></thead><tbody>{% for employee in profile.direct_reports %}<tr><td><strong>{{ (employee.get('employee_name') or employee.name)|e }}</strong><small>{{ employee.name|e }}</small></td><td>{{ (employee.get('designation') or '—')|e }}</td><td>{{ (employee.get('department') or '—')|e }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="welcome-empty">{{ profile.direct_reports_status|e }}</p>{% endif %}
+            {% if profile.direct_reports_more %}<p class="team-reports-hint">Showing the first 100 visible employees.</p>{% endif %}
+            {% if profile.direct_reports_url %}<a class="workspace-history" href="{{ profile.direct_reports_url|e }}" target="_blank" rel="noopener">Open employee list ↗</a>{% endif %}
+          </section>
+          <button class="welcome-next" data-next="work">Check your shift &amp; attendance <span aria-hidden="true">→</span></button>
+        </section>
+        <section id="panel-work" class="welcome-panel" role="tabpanel" aria-labelledby="tab-work" tabindex="0" hidden>
+          <div class="panel-intro"><span class="welcome-eyebrow">YOUR WORKING DAY</span><h2>Shift &amp; attendance</h2><p>Your schedule, check-ins and attendance records in one place.</p></div>
+
+
+          <section class="workspace-block" aria-label="Today at a glance"><div class="workspace-section-head"><h3>Today at a glance</h3><small>{{ plant_timezone|e }}</small></div><div class="workspace-stats"><div><span>First IN</span><strong id="workspace-first-in">{{ (profile.today_first_in or 'Not recorded')|e }}</strong></div><div><span>Latest OUT</span><strong id="workspace-latest-out">{{ (profile.today_latest_out or 'Not recorded')|e }}</strong></div><div><span>Assigned shift</span><strong>{{ (profile.shift.name if profile.shift else 'No shift assigned')|e }}</strong></div><div><span>Attendance record · today</span><strong id="workspace-attendance">{{ profile.final_attendance|e }}</strong></div></div>{% if profile.final_attendance_url %}<a class="workspace-history" href="{{ profile.final_attendance_url|e }}">View attendance record ↗</a>{% endif %}</section>
+          <section id="today-inout-report" class="workspace-block today-inout-report" aria-labelledby="today-inout-title" data-can-load="{{ 'true' if profile.employee else 'false' }}">
+            <div class="workspace-section-head"><h3 id="today-inout-title">Today’s IN / OUT report</h3><button type="button" id="refresh-today-inout" {% if not profile.employee %}disabled{% endif %}>Refresh</button></div>
+            <p id="today-inout-status" role="status">{{ 'Your check-in and check-out events appear here.' if profile.employee else 'No active employee is linked to your account.' }}</p>
+            <div class="today-inout-table-wrap"><table class="today-inout-table"><thead><tr><th scope="col">Type</th><th scope="col">Time</th><th scope="col">Device / source</th></tr></thead><tbody id="today-inout-rows"></tbody></table></div>
+            <small>Times shown in {{ plant_timezone|e }}. Check-in events are separate from finalized attendance.</small>
+          </section>
+          <p class="attendance-note" id="welcome-attendance-note" role="status" hidden></p>
+          <p class="last-checkin">Last check-in · {{ (profile.employee.branch if profile.employee and profile.employee.branch else "Branch not assigned")|e }}: <strong id="latest-gate-checkin">{{ (profile.last_checkin or 'No entry recorded')|e }}</strong></p>
+
+
+
+
+          <button type="button" class="welcome-next" data-next="profile">Back to My workspace <span aria-hidden="true">→</span></button>
+        </section>
+        <section id="panel-process" class="welcome-panel msa-app" role="tabpanel" aria-labelledby="tab-process" tabindex="0" hidden>
+          <div class="panel-intro"><span class="welcome-eyebrow">FROM START TO FINISH</span><h2>Business Flow</h2><p>Choose a process step to view its report.</p></div>
+          <section id="my-space-process-side" class="id-themed-side" aria-label="Business Flow modules"><h3>Modules</h3><div id="msp-modules"></div></section>
+          <div id="msp-lanes"></div>
+          <section class="msp-report"><div class="msp-toolbar"><h3 id="msp-title">Documents</h3><button id="msp-refresh" type="button">Refresh</button></div><div class="msp-toolbar"><label>Search<input id="msp-search" type="search" placeholder="Document or party…"></label><label>Period<select id="msp-period"><option value="today">Today</option><option value="week">This week</option><option value="month">This month</option><option value="year">This year</option><option value="custom">Custom range</option></select></label><label>From date<input type="date" id="msp-from"></label><label>To date<input type="date" id="msp-to"></label><label>Entry status<select id="msp-stage"><option value="">All entries</option><option value="0">Draft</option><option value="1">Submitted</option><option value="2">Cancelled</option></select></label><details id="msp-column-picker"><summary aria-label="Choose report columns"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg><span>Columns</span><span id="msp-column-count" aria-live="polite"></span><span class="msp-picker-chevron" aria-hidden="true">⌄</span></summary><div class="msp-column-menu"><div class="msp-column-menu-heading"><strong>Report columns</strong><button id="msp-columns-all" type="button">Show all</button></div><p>Choose the details to show in your table.</p><div id="msp-columns"></div><div class="msp-column-menu-footer"><small>Document and status always stay visible.</small><button id="msp-columns-done" type="button">Done</button></div></div></details></div><small class="msp-range-note">20 rows per page · Maximum date range: 366 days</small><p id="msp-status" role="status"></p><div id="msp-records"></div><div class="msp-toolbar"><button id="msp-prev" type="button">Previous</button><span id="msp-page"></span><button id="msp-next" type="button">Next</button></div></section>
+        </section>
+        <section id="panel-approvals" class="welcome-panel" role="tabpanel" aria-labelledby="tab-approvals" tabindex="0" hidden>
+          {% if profile.approvals %}<details class="workspace-access document-center-pending"><summary>Pending workflow actions <span>{{ profile.approval_count_label|e }}</span></summary><ul class="workspace-recent">{% for item in profile.approvals %}<li><a href="{{ item.url|e }}" target="_blank" rel="noopener">{{ item.title|e }} ↗</a></li>{% endfor %}</ul></details>{% endif %}
+          {% include "templates/includes/my_space_approvals.html" %}
+          <div id="my-space-load-status" class="my-space-loading" role="status" hidden></div>
+        </section>
+      </div>
+    </div>
+    <p id="welcome-status" role="status"></p>
+    <footer class="welcome-footer"><span>Take a moment. Your work will still be there.</span><span>Profile information reflects your current ERPNext records.</span></footer>
+  </main>
+  <dialog id="today-checkins-dialog" aria-labelledby="today-checkins-title"><div class="checkins-dialog-header"><h2 id="today-checkins-title">Today’s IN / OUT</h2><button type="button" id="close-today-checkins" aria-label="Close check-in details">✕</button></div><p id="today-checkins-status" role="status"></p><div class="checkins-table-wrap"><table><thead><tr><th>Type</th><th>Time</th><th>Branch / Device</th><th>Location</th></tr></thead><tbody id="today-checkins-rows"></tbody></table></div><small>Times shown in {{ plant_timezone|e }}. These are check-in events, not finalized attendance.</small></dialog>
+  <input type="hidden" id="welcome-csrf" value="{{ csrf_token|e }}">
+  <script src="{{ my_space_assets.date_ranges_js }}"></script>
+  <script src="{{ my_space_assets.welcome_js }}"></script>
+  <div id="all-symbols" hidden aria-hidden="true"></div>
+  {{ include_icons('/assets/frappe/icons/lucide/icons.svg') }}
+  {{ include_icons('/assets/frappe/icons/timeless/icons.svg') }}
+  {{ include_icons('/assets/frappe/icons/espresso/icons.svg') }}
+  <script>window.mySpaceAssets = {{ my_space_assets | tojson }};</script>
+  <script src="{{ my_space_assets.loader_js }}"></script>
+  <script src="{{ my_space_assets.process_js }}"></script>
+</body>
+</html>

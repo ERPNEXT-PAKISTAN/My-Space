@@ -1,0 +1,59 @@
+<div class="msa-app">
+  <div class="msa-controls">
+  <div class="panel-intro msa-controls-heading">
+    <span class="welcome-eyebrow">DOCUMENT CENTER</span>
+    <h2>Documents &amp; approvals</h2>
+    <p>Choose a module or work view. Review each entry in the document list.</p>
+  </div>
+  <div class="msa-toolbar">
+    <button type="button" class="msa-btn" id="msa-quick-entry"><span data-msa-icon="plus"></span>Quick entry</button>
+    <button type="button" class="msa-btn" id="msa-refresh"><span data-msa-icon="refresh"></span>Refresh</button>
+      <button type="button" class="msa-btn" data-work-view="drafts" aria-pressed="false">Draft</button>
+      <button type="button" class="msa-btn" data-work-view="submitted" aria-pressed="false">Submitted</button>
+  </div>
+  <section class="msa-section msa-control-card" aria-label="Your modules">
+    <div class="msa-section-heading"><h3><span class="msa-section-number">01</span> Modules</h3></div>
+    <nav class="msa-tabs" id="msa-tabs" aria-label="Modules"></nav>
+  </section>
+  <section class="msa-section msa-control-card" aria-label="Document stages">
+    <div class="msa-section-heading msa-stage-heading"><div><span class="msa-card-label"><span class="msa-section-number">02</span> DOCUMENT STAGES</span><h3 id="msa-flow-title">Document stages</h3></div><button type="button" class="msa-btn msa-primary" id="msa-new"><span data-msa-icon="plus"></span>New document</button></div>
+    <div class="msa-flow" id="msa-flow" aria-label="Document stages"></div>
+  </section>
+  <details class="msa-filter-panel msa-control-card" open>
+    <summary><span class="msa-section-number">03</span> Search &amp; filters <small id="msa-filter-count">No filters applied</small></summary>
+    <div class="msa-filterbar">
+      <label class="msa-search-field"><span>Search documents</span><input id="msa-search" type="search" placeholder="Document number…" aria-label="Search documents"></label>
+      <label><span>Company</span><select id="msa-company" aria-label="Company"><option value="">All companies</option></select></label>
+      <label><span>Status</span><select id="msa-status" aria-label="Status"><option value="">All statuses</option></select></label>
+      <label><span>Period</span><select id="msa-period" aria-label="Date period"><option value="today">Today</option><option value="week">This week</option><option value="month">This month</option><option value="year">This year</option><option value="custom">Custom range</option></select></label>
+      <label><span>From date</span><input id="msa-from" type="date" aria-label="From date"></label>
+      <label><span>To date</span><input id="msa-to" type="date" aria-label="To date"></label>
+      <button type="button" class="msa-btn" id="msa-clear">Reset filters</button>
+    </div>
+    <div class="msa-journey-summary" id="msa-stats" aria-label="Workflow totals"></div>
+  </details>
+  <section class="msa-control-card msa-views-card" aria-label="Work views">
+    <div class="msa-section-heading"><h3><span class="msa-section-number">04</span> Work views</h3></div>
+    <nav class="msa-work-views" aria-label="Work views">
+      <button type="button" data-work-view="recent" class="active" aria-pressed="true">Recent</button>
+      <button type="button" data-work-view="todos" aria-pressed="false">ToDo</button>
+      <button type="button" data-work-view="assigned" aria-pressed="false">Assigned to me</button>
+      <button type="button" data-work-view="checkins" aria-pressed="false">Check-ins</button>
+    </nav>
+  </section>
+  </div>
+  <section class="msa-section msa-documents" aria-label="Your documents">
+    <div class="msa-section-heading"><h3 id="msa-records-title">Recent documents</h3><small id="msa-record-count"></small></div>
+
+    <div id="msa-records" class="msa-document-list"></div>
+    <p class="welcome-empty" id="msa-empty" hidden>No matching documents.</p>
+    <div class="msa-list-foot"><small id="msa-work-note"></small><button type="button" class="msa-btn" id="msa-more" hidden>Load more</button></div>
+  </section>
+  <div class="msa-review-parking" hidden>
+  <section class="msa-section msa-review-panel" aria-label="Document review">
+    <div class="msa-section-heading msa-inline-review-heading"><div><span class="msa-card-label">DOCUMENT REVIEW</span><h3>Review <small id="msa-review-entry"></small></h3></div><button type="button" class="msa-btn" id="msa-review-refresh" aria-label="Refresh selected document"><span data-msa-icon="refresh"></span>Refresh</button></div>
+    <div id="msa-review"></div>
+  </section>
+  </div>
+  <p class="msa-error" id="msa-error" role="status" hidden></p>
+</div>

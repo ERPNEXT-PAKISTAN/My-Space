@@ -1,0 +1,97 @@
+#panel-process {min-width:0;}
+#msp-modules {display:grid;gap:7px;margin-top:16px;}
+#msp-modules button {text-align:start;border:1px solid #53788c;border-radius:7px;background:#234559;color:#eef7fc;padding:11px 12px;font:inherit;cursor:pointer;}
+#msp-modules button[aria-pressed="true"] {background:#b9dce9;color:#12394e;border-color:#b9dce9;font-weight:700;}
+.msp-report,.msp-lane {border:1px solid var(--msa-border);border-radius:10px;background:var(--msa-surface);padding:14px;margin-bottom:14px;}
+.msp-lane h3,.msp-toolbar h3 {font-size:14px;margin:0;}
+.msp-steps {display:flex;align-items:center;gap:8px;overflow-x:auto;padding:12px 0 4px;}
+.msp-steps button {flex:none;max-width:180px;white-space:normal;}
+.msp-arrow {color:var(--msa-muted);}
+#panel-process button,#panel-process select,#panel-process input {font:inherit;}
+#panel-process button,#panel-process select,#panel-process input {padding:8px 10px;border:1px solid var(--msa-border);border-radius:6px;color:var(--msa-ink);background:var(--msa-surface);}
+#panel-process button {cursor:pointer;}
+#panel-process button:disabled {opacity:.5;cursor:default;}
+#panel-process button[aria-pressed="true"] {background:#245b79;color:#fff;border-color:#245b79;font-weight:700;}
+.msp-toolbar {display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px;}
+.msp-toolbar h3 {flex:1;}
+.msp-toolbar label {display:grid;gap:4px;font-size:11px;color:var(--msa-ink);}
+#msp-search {max-width:100%;min-width:0;}
+#msp-column-picker {position:relative;font-size:11px;}
+#msp-column-picker summary {cursor:pointer;}
+#msp-columns {position:absolute;z-index:5;right:0;top:25px;min-width:180px;display:grid;gap:9px;background:var(--msa-surface);padding:14px;border:1px solid var(--msa-border);border-radius:7px;box-shadow:0 5px 15px #0003;}
+#msp-columns label {display:flex;gap:7px;align-items:center;}
+#msp-status {font-size:11px;color:var(--msa-muted);}
+#msp-records {overflow-x:auto;}
+.msp-table {width:100%;border-collapse:collapse;font-size:11px;}
+.msp-table th,.msp-table td {padding:9px 7px;border:1px solid var(--msa-border);text-align:start;vertical-align:top;overflow-wrap:anywhere;}
+.msp-table th {background:var(--msa-soft);font-size:10px;}
+.msp-table a {color:var(--msa-ink);font-weight:650;}
+.msp-statuses {display:flex;gap:6px;}
+.msp-statuses span {display:grid;gap:4px;min-width:0;}
+.msp-statuses small {font-size:9px;color:var(--msa-muted);}
+.msp-statuses b {font-size:10px;background:#dbeafe;color:#1e40af;padding:4px 6px;border-radius:5px;}
+.msp-statuses .msp-entry-0 b {background:#fef3c7;color:#92400e;}
+.msp-statuses .msp-entry-1 b {background:#d1fae5;color:#065f46;}
+.msp-statuses .msp-entry-2 b {background:#fee2e2;color:#991b1b;}
+[data-theme="dark"] .msp-statuses b {background:#1b3655;color:#b9d8ff;}
+[data-theme="dark"] .msp-statuses .msp-entry-0 b {background:#49391a;color:#ffe09b;}
+[data-theme="dark"] .msp-statuses .msp-entry-1 b {background:#153e33;color:#a5f3cf;}
+[data-theme="dark"] .msp-statuses .msp-entry-2 b {background:#4a252c;color:#ffc1ca;}
+#panel-process [hidden] {display:none!important;}
+.welcome-tabs {overflow-x:auto;}
+.welcome-tabs button {min-width:90px;}
+@media(max-width:600px) {
+ .msp-report {padding:10px;}
+ .msp-table {min-width:580px;}
+ .msp-table th,.msp-table td {padding:8px 6px;}
+ .msp-statuses {flex-wrap:nowrap;}
+}
+
+/* Business Flow uses the whole content area, with modules above its reports. */
+.welcome-layout[data-process-active="true"] {grid-template-columns:minmax(0,1fr);}
+.welcome-layout[data-process-active="true"] > .welcome-content {grid-column:1 / -1;}
+#panel-process #my-space-process-side {position:static;width:100%;max-height:none;margin:0 0 14px;padding:14px;}
+#my-space-process-side h3 {font-size:14px;margin:0;}
+#panel-process #msp-modules {display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+#panel-process #msp-modules button {flex:0 1 auto;background:#234559;color:#eef7fc;border-color:#53788c;}
+#panel-process #msp-modules button[aria-pressed="true"] {background:#b9dce9;color:#12394e;border-color:#b9dce9;}
+#panel-process .msp-report,#msp-records {width:100%;min-width:0;}
+
+/* High contrast heading on the ID-card background in both themes. */
+.welcome-page[data-theme] #panel-process #my-space-process-side > h3 {color:#f1f5f9;font-weight:700;opacity:1;}
+#panel-process #msp-modules button {min-width:100px;padding:9px 20px;text-align:center;line-height:1.4;}
+@media(max-width:600px) {
+ #panel-process #msp-modules button {min-width:0;padding:9px 16px;}
+}
+
+.msp-references {display:grid;gap:7px;min-width:140px;}
+.msp-references span {display:grid;gap:2px;}
+.msp-references small {color:var(--msa-muted);font-size:9px;}
+.msp-references strong {color:var(--msa-ink);font-size:11px;overflow-wrap:anywhere;}
+
+/* Column chooser: clear trigger and comfortable, theme-aware selection rows. */
+#panel-process #msp-column-picker {align-self:flex-end;margin-inline-start:auto;}
+#panel-process #msp-column-picker > summary {display:flex;align-items:center;gap:8px;list-style:none;padding:9px 12px;border:1px solid var(--msa-border);border-radius:8px;background:var(--msa-surface);color:var(--msa-ink);font-size:12px;font-weight:650;min-height:38px;user-select:none;}
+#msp-column-picker > summary::-webkit-details-marker {display:none;}
+#panel-process #msp-column-picker[open] > summary,#panel-process #msp-column-picker > summary:hover {border-color:#397a96;background:var(--msa-soft);}
+#msp-column-count {padding:2px 6px;border-radius:5px;background:var(--msa-soft);font-size:10px;font-variant-numeric:tabular-nums;}
+.msp-picker-chevron {margin-inline-start:3px;transition:transform .15s;}
+#msp-column-picker[open] .msp-picker-chevron {transform:rotate(180deg);}
+.msp-column-menu {position:absolute;z-index:20;inset-inline-end:0;top:calc(100% + 8px);width:290px;max-width:calc(100vw - 48px);padding:14px;border:1px solid var(--msa-border);border-radius:11px;background:var(--msa-surface);color:var(--msa-ink);box-shadow:0 10px 28px #0003;}
+.msp-column-menu-heading,.msp-column-menu-footer {display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.msp-column-menu-heading strong {font-size:13px;}
+.msp-column-menu > p {font-size:11px;color:var(--msa-muted);margin:7px 0 12px;}
+#panel-process #msp-columns {position:static;min-width:0;padding:0;display:grid;gap:5px;border:0;border-radius:0;box-shadow:none;background:transparent;max-height:260px;overflow-y:auto;}
+#panel-process #msp-columns label {display:flex;align-items:center;gap:10px;padding:10px;border:1px solid transparent;border-radius:7px;cursor:pointer;font-size:12px;color:var(--msa-ink);margin:0;}
+#panel-process #msp-columns label:has(input:checked) {background:var(--msa-soft);border-color:var(--msa-border);}
+#panel-process #msp-columns label:hover {background:var(--msa-soft);}
+#panel-process #msp-columns input {appearance:auto;flex:none;width:17px;height:17px;padding:0;margin:0;accent-color:#245b79;cursor:pointer;}
+.msp-column-menu-footer {margin-top:12px;padding-top:12px;border-top:1px solid var(--msa-border);}
+.msp-column-menu-footer small {font-size:10px;line-height:1.5;color:var(--msa-muted);max-width:170px;}
+#panel-process #msp-columns-all {padding:5px 8px;font-size:10px;font-weight:600;}
+#panel-process #msp-columns-done {background:#245b79;color:#fff;border-color:#245b79;font-weight:650;padding:7px 12px;}
+[data-theme="dark"] #panel-process #msp-columns input {accent-color:#90c9df;}
+
+#panel-process .msp-toolbar input[type="date"] {min-width:136px;color-scheme:light;}
+[data-theme="dark"] #panel-process .msp-toolbar input[type="date"] {color-scheme:dark;}
+.msp-range-note {color:var(--msa-muted);font-size:10px;}

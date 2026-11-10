@@ -8,7 +8,7 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
-        files: "arabic.*"
+        files: "my_space.*"
         exclude: ".*json$|.*txt$|.*csv|.*md|.*svg"
       - id: check-merge-conflict
       - id: check-ast
@@ -38,11 +38,11 @@ repos:
         # Ignore any files that might contain jinja / bundles
         exclude: |
             (?x)^(
-                arabic/public/dist/.*|
+                my_space/public/dist/.*|
                 .*node_modules.*|
                 .*boilerplate.*|
-                arabic/templates/includes/.*|
-                arabic/public/js/lib/.*
+                my_space/templates/includes/.*|
+                my_space/public/js/lib/.*
             )$
 
 
@@ -55,12 +55,12 @@ repos:
         # Ignore any files that might contain jinja / bundles
         exclude: |
             (?x)^(
-                arabic/public/dist/.*|
+                my_space/public/dist/.*|
                 cypress/.*|
                 .*node_modules.*|
                 .*boilerplate.*|
-                arabic/templates/includes/.*|
-                arabic/public/js/lib/.*
+                my_space/templates/includes/.*|
+                my_space/public/js/lib/.*
             )$
 
 ci:

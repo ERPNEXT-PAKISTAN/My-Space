@@ -1,0 +1,40 @@
+<div class="ft-app">
+  <main class="ft-main">
+    <header class="ft-topbar"><div class="ft-page-heading"><span class="ft-page-icon" data-ft-icon="flow"></span><div><div class="ft-crumb">WORKSPACE / DOCUMENT CENTER</div><h1>FlowTrack</h1><div class="ft-subtitle">Follow your documents. Take the next step.</div></div></div>
+      <nav class="ft-tabs" id="ft-tabs" aria-label="Modules"></nav>
+      <div class="ft-actions"><button class="ft-btn ft-quick-entry" id="ft-quick-entry"><span data-ft-icon="plus"></span>Quick Entry</button><button class="ft-btn" id="ft-refresh"><span data-ft-icon="refresh"></span>Refresh</button><div class="ft-avatar" id="ft-avatar"></div></div>
+    </header>
+    <section class="ft-panel ft-journey-panel ft-ribbon" aria-label="Document journey">
+      <span class="ft-sr-only" id="ft-flow-title">Document journey</span>
+      <div class="ft-flow-area"><div class="ft-flow" id="ft-flow" aria-label="Document stages"></div></div>
+      <button class="ft-btn ft-primary" id="ft-new"><span data-ft-icon="plus"></span>New document</button>
+    </section>
+    <details class="ft-filter-panel">
+      <summary><span class="ft-filter-summary-label"><span data-ft-icon="search"></span>Filters &amp; search<span id="ft-filter-count">No filters applied</span></span><span class="ft-filter-chevron" aria-hidden="true">⌄</span></summary>
+    <section class="ft-filterbar" aria-label="Document filters">
+      <label class="ft-filter-field ft-search-field"><span>Search documents</span><div class="ft-control-wrap"><span data-ft-icon="search"></span><input id="ft-search" type="search" placeholder="Document number…" aria-label="Search documents"></div></label>
+      <label class="ft-filter-field"><span>Company</span><select id="ft-company" class="ft-filter" aria-label="Company"><option value="">All companies</option></select></label>
+      <label class="ft-filter-field"><span>Document status</span><select id="ft-status" class="ft-filter" aria-label="Status"><option value="">All statuses</option><option>Draft</option><option>Submitted</option><option>Cancelled</option></select></label>
+      <label class="ft-filter-field"><span>From date</span><input id="ft-from" class="ft-filter" type="date" aria-label="From date"></label>
+      <label class="ft-filter-field"><span>To date</span><input id="ft-to" class="ft-filter" type="date" aria-label="To date"></label>
+      <button class="ft-btn ft-reset" id="ft-clear" title="Reset document filters"><span data-ft-icon="reset"></span>Reset</button>
+    </section>
+      <div class="ft-journey-summary" id="ft-stats" aria-label="Workflow totals"></div>
+    </details>
+    <section class="ft-lower">
+      <div class="ft-panel"><div class="ft-panel-head"><div><div class="ft-panel-title"><span class="ft-section-icon ft-icon-blue" data-ft-icon="file"></span><span id="ft-records-title">Recent documents</span></div><div class="ft-panel-desc">Latest records you can access</div></div><span class="ft-record-count" id="ft-record-count"></span></div>
+       <nav class="ft-work-views" aria-label="Work views">
+         <button type="button" data-work-view="recent" class="active" aria-pressed="true">Recent</button>
+         <button type="button" data-work-view="todos" aria-pressed="false">ToDo</button>
+         <button type="button" data-work-view="assigned" aria-pressed="false">Assigned to Me</button>
+         <button type="button" data-work-view="checkins" aria-pressed="false">Checkin</button>
+         <button type="button" data-work-view="drafts" aria-pressed="false">Draft</button>
+         <button type="button" data-work-view="submitted" aria-pressed="false">Submitted</button>
+       </nav>
+       <div class="ft-table-wrap"><table><thead><tr><th>Document</th><th>Party / title</th><th>Status</th><th class="ft-action-heading">Action</th></tr></thead><tbody id="ft-records"></tbody></table><div class="ft-empty" id="ft-empty" hidden>No matching documents.</div></div><div class="ft-table-foot"><span id="ft-work-note" class="ft-work-note"></span><button class="ft-btn" id="ft-more" hidden>Load more</button></div>
+      </div>
+      <aside class="ft-panel ft-review-panel" aria-label="Document review"><div class="ft-panel-head"><div><div class="ft-panel-title"><span class="ft-section-icon ft-icon-green" data-ft-icon="review"></span>Review<span id="ft-review-entry" class="ft-review-entry"></span></div></div><button class="ft-btn" id="ft-review-refresh" aria-label="Refresh selected document"><span data-ft-icon="refresh"></span>Refresh</button></div><div id="ft-review"><div class="ft-empty">Select a document to review its details here.</div></div></aside>
+    </section>
+    <div class="ft-error" id="ft-error" hidden></div>
+  </main>
+</div>

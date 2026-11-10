@@ -1,0 +1,241 @@
+/* My Space-owned welcome accessibility layer. Loaded after shared factory styles. */
+.welcome-page:not([data-theme="dark"]) {--welcome-readable-ink:#111827;--welcome-readable-muted:#334155;--welcome-readable-border:#64748b;color:var(--welcome-readable-ink);}
+/* Preserve the blue visual identity; adjust foreground contrast, not white surfaces. */
+.welcome-page:not([data-theme="dark"]) .welcome-topbar {background:linear-gradient(105deg,var(--welcome-navy),var(--welcome-blue));color:#fff;border-bottom:1px solid #90e0ef;box-shadow:0 3px 16px #03045e2e;}
+.welcome-page:not([data-theme="dark"]) .welcome-brand,
+.welcome-page:not([data-theme="dark"]) .welcome-brand>span,
+.welcome-page:not([data-theme="dark"]) .welcome-brand small,
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions,
+.welcome-page:not([data-theme="dark"]) #welcome-clock {color:#fff;}
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions button,
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions #reduce-animation,
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions #welcome-signout {color:#fff;background:#06486d;border:1px solid #90e0ef;opacity:1;}
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions button:hover,
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions button:focus-visible {color:#fff;background:#033955;border-color:#fff;outline-color:#fff;}
+.welcome-page:not([data-theme="dark"]) .welcome-header-actions #reduce-animation[aria-pressed="true"] {background:#d1fae5;color:#064e3b;border-color:#047857;}
+/* Saturated blue sign-in panel with readable white notes across the gradient. */
+.welcome-page:not([data-theme="dark"]) .welcome-session-strip {background:linear-gradient(112deg,#075477,#0077b6);color:#fff;border-color:#56c5dc;box-shadow:0 7px 18px #0077b630;}
+.welcome-page:not([data-theme="dark"]) .welcome-session-strip>div:first-child>span,
+.welcome-page:not([data-theme="dark"]) #session-login-time,
+.welcome-page:not([data-theme="dark"]) #attendance-state,
+.welcome-page:not([data-theme="dark"]) #location-readiness,
+.welcome-page:not([data-theme="dark"]) .welcome-session-strip small {color:#fff;}
+.welcome-page:not([data-theme="dark"]) .welcome-checkin-action small {line-height:1.6;}
+.welcome-page:not([data-theme="dark"]) #mark-employee-checkin {background:#153e5b;border-color:#153e5b;color:#fff;}
+.welcome-page:not([data-theme="dark"]) :is(#mark-employee-checkout,#check-location,[data-today-checkins]) {background:#caf0f8;color:#111827;border-color:#437c93;}
+/* Readable body copy, labels, empty states, dates and permission hints in every tab. */
+.welcome-page:not([data-theme="dark"]) :is(.welcome-heading h1,.panel-intro h2,.roles-card h3,.your-work h3,.your-assignments h3,.workspace-intro h2,.workspace-section-head h3,.team-tile h3,.shift-pass h2,.workspace-access summary,.assignment-row strong,.workspace-stats strong) {color:#111827;}
+.welcome-page:not([data-theme="dark"]) :is(.welcome-heading p:not(.welcome-eyebrow),.panel-intro p,.welcome-empty,.roles-card p,.workspace-intro p,.workspace-access p,.workspace-section-head small,.workspace-stats span,.workspace-recent small,.your-assignments small,.work-permission-hint,.work-links small,.module-readonly,.shift-pass p,.shift-times small,.shift-zone,.last-checkin,.welcome-footer,.team-tile p,.team-tile small,.assignment-priority,.assignment-due,.work-module small) {color:#334155;}
+.welcome-page:not([data-theme="dark"]) :is(.welcome-eyebrow,.welcome-tabs b) {color:#124e70;}
+.welcome-page:not([data-theme="dark"]) .welcome-tabs button {color:#111827;}
+.welcome-page:not([data-theme="dark"]) .welcome-tabs button[aria-selected="true"] {background:#153e5b;color:#fff;}
+.welcome-page:not([data-theme="dark"]) .welcome-tabs button[aria-selected="true"] b {color:#fff;}
+.welcome-page:not([data-theme="dark"]) :is(.workspace-recent a,.your-assignments a,.work-links a,.workspace-action,.workspace-history,.role-chips span,.last-checkin strong) {color:#111827;}
+.welcome-page:not([data-theme="dark"]) :is(.workspace-block,.workspace-access,.team-tile,.work-module,.workspace-stats>div,.role-chips span,.welcome-tabs,.shift-pass) {border-color:#94a3b8;}
+.welcome-page:not([data-theme="dark"]) :is(#today-checkins-dialog small,#today-checkins-status,.checkins-table-wrap th,.checkins-table-wrap td) {color:#111827;}
+.welcome-page:not([data-theme="dark"]) #today-checkins-dialog {background:#caf0f8;color:#111827;border-color:#437c93;}
+/* Keep the illustrated personnel pass legible on its intentionally dark surface. */
+.welcome-page:not([data-theme="dark"]) .welcome-guide :is(.pass-person h2,.pass-person p,.pass-person small,.pass-fields dt,.pass-fields dd,.pass-topline,.pass-bottom,.id-company,.guide-copy p,.guide-hint,.guide-walkway i) {color:#f1f5f9;}
+.welcome-page:not([data-theme="dark"]) .welcome-guide .verified-pill {color:#d1fae5;border-color:#6ee7b7;}
+/* Native Approvals and Review use the same readable text tokens. */
+.welcome-page:not([data-theme="dark"]) .msa-app {--msa-ink:#111827;--msa-muted:#334155;--msa-border:#94a3b8;--msa-surface:#caf0f8;--msa-soft:#bde8f2;--text-color:#111827;--text-muted:#334155;}
+.welcome-page:not([data-theme="dark"]) .msa-app :is(.msa-doc,.msa-tab,.msa-work-views button,.msa-review-button,.msa-step-marker,.msa-step-selected:after,.msr-root a,.msr-root .msr-review-tabs>button,.msr-root .msr-comment-title,.msr-root .msr-facts-heading) {color:#111827;}
+.welcome-page:not([data-theme="dark"]) .msa-app :is(.msa-btn:not(.msa-primary),.msa-tab,.msa-step,.msr-icon-button,.msr-root .btn-default) {border-color:#64748b;color:#111827;}
+.welcome-page:not([data-theme="dark"]) .msa-app .msa-primary,
+.welcome-page:not([data-theme="dark"]) .msa-app .msr-root .msr-primary {background:#153e5b;color:#fff;border-color:#153e5b;}
+.welcome-page:not([data-theme="dark"]) .msa-app .msr-root :is(.msr-detail-card dt,.msr-root small) {color:#334155;}
+/* Clear focus outlines remain visible in both themes. */
+.welcome-page :is(button,a,input,select,textarea):focus-visible {outline:2px solid currentColor;outline-offset:3px;}
+/* The body theme must also drive website headings and dialog controls. */
+.welcome-page[data-theme="dark"] {--heading-color:#f1f5f9;--text-color:#e2edf2;--text-muted:#b8cbd5;--border-color:#587585;--card-bg:#1c2a33;--control-bg:#223640;--bg-color:#10171d;--subtle-fg:#223640;}
+.welcome-page[data-theme="dark"] :is(h1,h2,h3,h4,h5,h6) {color:#f1f5f9;}
+.welcome-page[data-theme="dark"] :is(.panel-intro h2,.workspace-intro h2,.workspace-section-head h3,.your-work h3,.your-assignments h3,.roles-card h3,.team-tile h3,.shift-pass h2,.checkins-dialog-header h2) {color:#f1f5f9;}
+.welcome-page[data-theme="dark"] :is(.panel-intro p,.workspace-intro p,.workspace-access p,.roles-card p,.work-permission-hint,.module-readonly,.welcome-empty,.shift-zone,.last-checkin,.welcome-footer) {color:#b8cbd5;}
+.welcome-page[data-theme="dark"] :is(.control-label,.form-group label,.modal-title,.modal-body label) {color:#e2edf2;}
+.welcome-page[data-theme="dark"] .modal-content {background:#1c2a33;color:#e2edf2;border-color:#587585;}
+.welcome-page[data-theme="dark"] .modal-content :is(input,select,textarea,.form-control) {background:#223640;color:#e2edf2;border-color:#587585;}
+.welcome-page[data-theme="dark"] .modal-content .btn-default {background:#223640;color:#e2edf2;border-color:#587585;}
+.welcome-page[data-theme="dark"] .msa-app .panel-intro h2 {color:#f1f5f9;}
+/* Review stays prominent after the general light-mode button rules. */
+.welcome-page:not([data-theme="dark"]) .msa-app .msa-btn.msa-review-button {background:#075477;color:#fff;border-color:#075477;}
+.welcome-page:not([data-theme="dark"]) .msa-app .msa-btn.msa-review-button:hover {background:#033955;color:#fff;border-color:#033955;}
+
+/* Entry button text must win over legacy record-list selectors in both modes. */
+.welcome-page:not([data-theme="dark"]) #msa-records .msa-btn.msa-review-button {color:#fff;background:#075477;border-color:#075477;opacity:1;font-size:12px;line-height:1.4;}
+.welcome-page:not([data-theme="dark"]) #msa-records .msa-btn.msa-review-button:hover {color:#fff;background:#033955;border-color:#033955;}
+.welcome-page[data-theme="dark"] #msa-records .msa-btn.msa-review-button {color:#10212b;background:#7db8ff;border-color:#a9d3ff;opacity:1;font-size:12px;line-height:1.4;}
+.welcome-page[data-theme="dark"] #msa-records .msa-btn.msa-review-button:hover {color:#10212b;background:#a9d3ff;border-color:#a9d3ff;}
+/* A calmer blue light-mode workspace: less saturated fill and clearer hierarchy. */
+.welcome-page:not([data-theme="dark"]) .msa-app {--msa-surface:#e0f1f6;--msa-soft:#cbe4ed;--msa-border:#8ab2c1;--msa-ink:#142f40;--msa-muted:#385565;--msa-table-head:#bddbe7;--msa-table-stripe:#d1e8f0;--msa-grid:#89aab9;}
+.welcome-page:not([data-theme="dark"]) #my-space-review-slot {background:#cbe4ed;border-color:#8ab2c1;box-shadow:0 3px 12px #1740560c;}
+.welcome-page:not([data-theme="dark"]) .msa-controls .msa-control-card {background:#e0f1f6;border-color:#9abfcd;}
+.welcome-page:not([data-theme="dark"]) .msa-controls :is(.msa-tab,.msa-step,.msa-work-views button) {background:#d4e9f1;border-color:#9abfcd;color:#142f40;}
+.welcome-page:not([data-theme="dark"]) .msa-controls :is(.msa-tab.active,.msa-step.active,.msa-work-views button.active) {background:#b5d7e6;border-color:#075477;color:#0b354e;box-shadow:inset 3px 0 #075477;}
+.welcome-page:not([data-theme="dark"]) .msa-controls .msa-section-number {background:#c1dce8;border-color:#91b4c5;}
+.welcome-page:not([data-theme="dark"]) .msa-documents>.msa-section-heading {padding:0 2px 10px;margin-bottom:12px;border-bottom:1px solid #8ab2c1;}
+.welcome-page:not([data-theme="dark"]) .msa-inline-review-heading {background:#c1dce8;border-bottom-color:#8ab2c1;}
+.welcome-page:not([data-theme="dark"]) .msa-entry-review .msr-root :is(.msr-detail-card,.msr-workflow-card,.msr-expense-card) {background:#d7eaf1;border-color:#96b8c6;}
+.welcome-page:not([data-theme="dark"]) .msa-entry-review .msr-root :is(.msr-facts-heading,.msr-workflow-card h3) {background:#c1dce8;color:#142f40;}
+/* Match My Workspace's section cards throughout Approvals and inline Review. */
+.welcome-page:not([data-theme="dark"]) .msa-app {--msa-section-bg:#e9faffdf;--msa-section-border:#94a3b8;--msa-section-shadow:0 6px 18px #0077b61a;--msa-surface:#e9faff;--msa-soft:#caf0f88f;--msa-table-stripe:#def4f9;}
+.welcome-page[data-theme="dark"] .msa-app {--msa-section-bg:#192932;--msa-section-border:#3c5360;--msa-section-shadow:none;--msa-surface:#1d303a;--msa-soft:#263d49;--msa-table-stripe:#233943;}
+.welcome-page .msa-app .msa-controls .msa-control-card,
+.welcome-page .msa-app .msa-document-card,
+.welcome-page[data-theme] .msa-entry-review .msr-root :is(.msr-detail-card,.msr-workflow-card,.msr-expense-card,.msr-document-remarks,.msr-claim-context,.msr-advance-panel,.msr-financial-overview,.msr-review-settlement,.msr-linked-entry) {background:var(--msa-section-bg);border:1px solid var(--msa-section-border);border-radius:12px;box-shadow:var(--msa-section-shadow);}
+.welcome-page[data-theme] .msa-entry-review .msr-root :is(.msr-claim-context,.msr-advance-panel,.msr-financial-overview,.msr-review-settlement,.msr-linked-entry) {padding:12px;margin:0 0 12px;}
+.welcome-page .msa-entry-review .msr-root .msr-top-actions {background:var(--msa-soft);border:1px solid var(--msa-section-border);border-radius:9px;padding:10px;margin-bottom:12px;}
+.welcome-page .msa-entry-review .msr-root .msr-drawer footer {background:var(--msa-section-bg);border-color:var(--msa-section-border);box-shadow:var(--msa-section-shadow);}
+.welcome-page:not([data-theme="dark"]) #my-space-review-slot {background:#caf0f88f;}
+.welcome-page:not([data-theme="dark"]) .msa-entry-review .msr-root :is(.msr-facts-heading,.msr-workflow-card h3) {background:#caf0f88f;}
+.welcome-page .msa-app .msa-document-card.msa-selected {border-color:var(--factory-brand);}
+
+/* Reversible preview: the Document Center heading borrows the personnel ID theme. */
+.welcome-page #my-space-review-slot .msa-controls .msa-controls-heading {position:relative;padding:23px 16px 17px;margin:0 0 16px;border:1px solid #bea879;border-radius:15px;background:radial-gradient(ellipse at top,#42616b,#1b2d37 70%);box-shadow:0 8px 18px #0003;color:#f1f5f9;overflow:hidden;}
+.welcome-page #my-space-review-slot .msa-controls .msa-controls-heading:before {content:'';display:block;width:46px;height:6px;margin:0 auto 16px;border-radius:8px;background:#0d191f;border:1px solid #82908b;box-shadow:inset 0 2px 3px #0008;}
+.welcome-page #my-space-review-slot .msa-controls .msa-controls-heading h2 {color:#f1f5f9;}
+.welcome-page #my-space-review-slot .msa-controls .msa-controls-heading p {color:#d8eaf2;line-height:1.6;font-size:11px;}
+.welcome-page #my-space-review-slot .msa-controls .msa-controls-heading .welcome-eyebrow {color:#f0d49d;font-size:9px;letter-spacing:1.8px;}
+.welcome-page:not([data-theme="dark"]) #my-space-review-slot .msa-controls .msa-controls-heading {background:radial-gradient(ellipse at 100% 0,#90e0ef42,transparent 70%),linear-gradient(120deg,var(--welcome-navy),var(--welcome-blue));border-color:#54cae1;box-shadow:0 8px 18px #0077b62b;}
+.welcome-page:not([data-theme="dark"]) #my-space-review-slot .msa-controls .msa-controls-heading .welcome-eyebrow {color:#caf0f8;}
+
+/* Extend the reversible ID-card theme to every Document Center control section. */
+.welcome-page[data-theme] #my-space-review-slot .msa-controls {--msa-ink:#f1f5f9;--msa-muted:#d8eaf2;--msa-border:#789ba9;--msa-surface:#203844;--msa-soft:#294956;--msa-on-brand:#10212b;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-control-card {background:radial-gradient(ellipse at top,#42616b,#1b2d37 70%);border:1px solid #bea879;border-radius:12px;box-shadow:0 6px 14px #0002;color:#f1f5f9;}
+.welcome-page:not([data-theme="dark"]) #my-space-review-slot .msa-controls .msa-control-card {background:radial-gradient(ellipse at 100% 0,rgba(144,224,239,.26),transparent 70%),linear-gradient(120deg,#03045e,#0077b6);border-color:#54cae1;box-shadow:0 6px 14px #0077b62b;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls :is(h3,.msa-card-label,.msa-section-heading>span,.msa-filter-panel summary,.msa-filter-panel summary small,.msa-filterbar label,.msa-summary-value,.msa-summary-value strong) {color:#f1f5f9;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-section-number {background:#102a38;color:#f0d49d!important;border-color:#92acb6;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls :is(.msa-tab,.msa-step,.msa-work-views button,.msa-toolbar .msa-btn) {background:#173648;color:#f1f5f9;border-color:#759fae;box-shadow:none;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls :is(.msa-tab,.msa-step,.msa-work-views button,.msa-toolbar .msa-btn):hover {background:#284f62;border-color:#b5effa;color:#fff;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls :is(.msa-tab.active,.msa-step.active,.msa-work-views button.active) {background:#b9e6ef;border-color:#e0faff;color:#102f43;box-shadow:inset 3px 0 #0077b6;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls :is(.msa-tab,.msa-step) :is(span,strong,svg) {color:inherit;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-step-count {opacity:1;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-step:not(.active) .msa-step-drafts {color:#ffe09b;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-primary {background:#b9e6ef;color:#102f43;border-color:#e0faff;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-filterbar :is(input,select) {background:#153448;color:#f1f5f9;border-color:#8bb6c6;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-filterbar input::placeholder {color:#c3dce5;opacity:1;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-filterbar option {background:#153448;color:#f1f5f9;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls #msa-clear {background:#173648;color:#f1f5f9;border-color:#8bb6c6;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-filter-panel summary:after {color:#caf0f8;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls :is(button,input,select,summary):focus-visible {outline-color:#caf0f8;}
+/* Tighter spacing between Document Center cards. */
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-control-card {margin-bottom:7px;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-control-card:last-child {margin-bottom:0;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-toolbar {margin-bottom:10px;}
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-controls-heading {margin-bottom:10px;}
+
+.welcome-page[data-theme] #my-space-review-slot .msa-controls .msa-toolbar .msa-btn[data-work-view].active {background:#b9e6ef;border-color:#e0faff;color:#102f43;box-shadow:inset 3px 0 #0077b6;}
+
+.workspace-entry-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.workspace-entry-card {min-width:0;}
+.workspace-entry-card .workspace-action {min-height:48px;}
+.workspace-entry-list {display:inline-block;margin:7px 2px 3px;font-size:11px;color:var(--factory-brand);text-decoration:underline;}
+.welcome-page:not([data-theme="dark"]) .workspace-entry-list {color:#124e70;}
+.welcome-page[data-theme="dark"] .workspace-entry-list {color:#b9d8ff;}
+@media(max-width:600px) {.workspace-entry-grid {grid-template-columns:minmax(0,1fr);}}
+
+/* Tab responsibilities: work tools in Workspace, attendance actions in their tab. */
+#panel-work .welcome-session-strip {grid-template-columns:minmax(0,1fr);padding:18px;margin-bottom:16px;}
+#panel-work .welcome-checkin-action {justify-content:flex-start;}
+#panel-profile .your-work {margin-top:22px;}
+#panel-profile .your-assignments {margin-bottom:18px;}
+.document-center-pending {margin-bottom:16px;}
+.welcome-tabs button {overflow-wrap:anywhere;}
+
+.team-reports {margin-top:20px;}
+.team-reports-hint {font-size:11px;color:var(--text-muted,#a0b1ba);margin:6px 0 12px;}
+.team-reports-table {overflow:auto;border:1px solid #53717f;border-radius:8px;}
+.team-reports-table table {width:100%;border-collapse:collapse;font-size:12px;}
+.team-reports-table th,.team-reports-table td {padding:10px;text-align:left;border-bottom:1px solid #53717f;vertical-align:top;}
+.team-reports-table th {font-size:10px;background:#223640;color:#e2edf2;}
+.team-reports-table td {color:#e2edf2;}
+.team-reports-table td small {display:block;font-size:10px;color:#b8cbd5;margin-top:3px;}
+.team-reports-table tr:last-child td {border-bottom:0;}
+.welcome-page:not([data-theme="dark"]) .team-reports-hint {color:#334155;}
+.welcome-page:not([data-theme="dark"]) .team-reports-table {border-color:#94a3b8;}
+.welcome-page:not([data-theme="dark"]) .team-reports-table :is(th,td) {color:#142f40;border-color:#94a3b8;}
+.welcome-page:not([data-theme="dark"]) .team-reports-table th {background:#caf0f8;}
+.welcome-page:not([data-theme="dark"]) .team-reports-table td small {color:#385565;}
+
+/* One sidebar per tab, all using the personnel-card visual language. */
+.welcome-layout>[data-side-tab][hidden] {display:none!important;}
+.id-themed-side {position:sticky;top:20px;min-width:0;max-height:calc(100vh - 40px);overflow:auto;padding:20px 16px;border:1px solid #bea879;border-radius:15px;background:radial-gradient(ellipse at top,#42616b,#1b2d37 70%);box-shadow:0 12px 24px #0003;color:#f1f5f9;}
+.welcome-page:not([data-theme="dark"]) .id-themed-side {background:radial-gradient(ellipse at 100% 0,rgba(144,224,239,.26),transparent 70%),linear-gradient(120deg,#03045e,#0077b6);border-color:#54cae1;}
+.id-side-slot {width:46px;height:6px;margin:0 auto 18px;border-radius:8px;background:#0d191f;border:1px solid #82908b;box-shadow:inset 0 2px 3px #0008;}
+.welcome-page[data-theme] #workspace-modules-side .your-work {margin:0;}
+.welcome-page[data-theme] #workspace-modules-side h3 {font-size:21px;color:#f1f5f9;margin:0 0 8px;}
+.welcome-page[data-theme] #workspace-modules-side .work-permission-hint {color:#d8eaf2;font-size:11px;line-height:1.6;}
+.welcome-page[data-theme] #workspace-modules-side .work-links {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.welcome-page[data-theme] #workspace-modules-side .work-module {background:#173648;border-color:#759fae;box-shadow:none;min-width:0;}
+.welcome-page[data-theme] #workspace-modules-side .work-module a {background:transparent;border:0;box-shadow:none;color:#f1f5f9;padding:10px;}
+.welcome-page[data-theme] #workspace-modules-side .work-module a:hover {background:#284f62;}
+.welcome-page[data-theme] #workspace-modules-side .work-module :is(strong,small,.module-readonly) {color:#d8eaf2;overflow-wrap:anywhere;}
+.welcome-page[data-theme] #workspace-modules-side .work-module strong {color:#fff;font-size:11px;}
+.welcome-page[data-theme] #workspace-modules-side .pin-module {background:#102a38;color:#caf0f8;border-color:#759fae;font-size:10px;}
+.welcome-page[data-theme] #workspace-modules-side .pin-module[aria-pressed="true"] {background:#b9e6ef;color:#102f43;border-color:#e0faff;}
+.welcome-page[data-theme] #workspace-modules-side .work-module .module-create {background:#264d60;color:#fff;border-top:1px solid #759fae;}
+.welcome-page[data-theme] #attendance-shift-side .shift-pass {background:transparent;border:0;box-shadow:none;padding:0;color:#f1f5f9;display:block;}
+.welcome-page[data-theme] #attendance-shift-side .shift-pass :is(h2,p,small,.welcome-eyebrow,.shift-clock-icon,.shift-times span) {color:#f1f5f9;}
+.welcome-page[data-theme] #attendance-shift-side .shift-pass h2 {font-size:24px;margin:12px 0;overflow-wrap:anywhere;}
+.welcome-page[data-theme] #attendance-shift-side .shift-pass .welcome-eyebrow {color:#caf0f8;}
+.welcome-page[data-theme] #attendance-shift-side .shift-clock-icon {display:block;margin:14px 0;font-size:34px;}
+.welcome-page[data-theme] #attendance-shift-side .shift-times {display:grid;grid-template-columns:minmax(0,1fr);gap:12px;border-color:#759fae;font-size:16px;}
+.welcome-page[data-theme] #attendance-shift-side .shift-times>span[aria-hidden] {display:none;}
+.welcome-page[data-theme] #attendance-shift-side .shift-times small {font-size:10px;margin-bottom:4px;}
+.welcome-page[data-theme] #attendance-shift-side .shift-zone {font-size:11px;line-height:1.6;margin-top:16px;}
+@media(max-width:800px) {.id-themed-side {position:static;max-height:none;}}
+.welcome-page[data-theme] .id-themed-side .welcome-empty {color:#d8eaf2;}
+
+/* ERPNext modules are the first level; their document links expand underneath. */
+.welcome-page[data-theme] #workspace-modules-side .work-links {grid-template-columns:minmax(0,1fr);}
+.welcome-page[data-theme] #workspace-modules-side .module-group-card {position:relative;}
+.welcome-page[data-theme] #workspace-modules-side .module-group-card .pin-module {position:absolute;right:9px;top:12px;margin:0;padding:4px 6px;z-index:1;}
+.welcome-page[data-theme] #workspace-modules-side .module-group summary {position:relative;cursor:pointer;list-style:none;padding:13px 80px 13px 13px;}
+.welcome-page[data-theme] #workspace-modules-side .module-group summary::-webkit-details-marker {display:none;}
+.welcome-page[data-theme] #workspace-modules-side .module-group summary strong {display:block;font-size:13px;color:#f1f5f9;}
+.welcome-page[data-theme] #workspace-modules-side .module-group summary small {display:block;font-size:10px;margin-top:4px;color:#c4dce6;}
+.welcome-page[data-theme] #workspace-modules-side .module-group[open] summary {border-bottom:1px solid #759fae;}
+.welcome-page[data-theme] #workspace-modules-side .module-document-links {padding:4px 0;}
+.welcome-page[data-theme] #workspace-modules-side .module-document-links a {display:flex;justify-content:space-between;gap:10px;padding:9px 13px;font-size:12px;border-radius:0;}
+
+/* Subdocuments have their own lighter surface, separate from the module heading. */
+.welcome-page[data-theme] #workspace-modules-side .module-document-links {background:#d6eef6;padding:7px;max-height:300px;overflow:auto;}
+.welcome-page[data-theme] #workspace-modules-side .module-document-links a {background:#b9dce9;color:#12394e;border:1px solid #89b6c9;border-radius:6px;padding:9px 10px;margin-bottom:5px;font-size:11px;}
+.welcome-page[data-theme] #workspace-modules-side .module-document-links a:last-child {margin-bottom:0;}
+.welcome-page[data-theme] #workspace-modules-side .module-document-links a:hover {background:#90c9df;color:#0b2f43;border-color:#397a96;}
+.welcome-page[data-theme="dark"] #workspace-modules-side .module-document-links {background:#122731;}
+.welcome-page[data-theme="dark"] #workspace-modules-side .module-document-links a {background:#2c4858;color:#e7f5fb;border-color:#52788d;}
+.welcome-page[data-theme="dark"] #workspace-modules-side .module-document-links a:hover {background:#3c6073;color:#fff;border-color:#94c6dc;}
+.welcome-page[data-theme] #workspace-modules-side .module-search-label {display:block;margin:12px 0 5px;color:#d8eaf2;font-size:10px;}
+.welcome-page[data-theme] #workspace-modules-side #workspace-module-search {width:100%;min-width:0;padding:10px;border:1px solid #8bb6c6;border-radius:7px;background:#153448;color:#f1f5f9;font:inherit;font-size:11px;margin-bottom:12px;}
+.welcome-page[data-theme] #workspace-modules-side #workspace-module-search::placeholder {color:#c3dce5;opacity:1;}
+#workspace-modules-side [hidden] {display:none!important;}
+
+/* Put mobile navigation before the active sidebar and tab content. */
+@media (max-width:800px) {
+  .welcome-layout > .welcome-content {display:contents;}
+  .welcome-layout .welcome-tabs {order:-1;grid-column:1 / -1;margin-bottom:0;}
+  .welcome-layout > [data-side-tab] {order:0;}
+  .welcome-layout .welcome-panel {order:1;min-width:0;}
+}
+
+/* Always-visible personal IN/OUT report in Shift & attendance. */
+.today-inout-report {color:#183c50;}
+.today-inout-report .workspace-section-head {align-items:center;gap:12px;}
+#refresh-today-inout {padding:7px 12px;border:1px solid #7babbc;border-radius:7px;background:#cce9f2;color:#12394e;font:inherit;font-size:11px;cursor:pointer;}
+#refresh-today-inout:disabled {opacity:.5;cursor:default;}
+#today-inout-status,.today-inout-report>small {color:#3b5e70;font-size:11px;}
+.today-inout-table-wrap {overflow-x:auto;margin:12px 0;}
+.today-inout-table {width:100%;border-collapse:collapse;font-size:12px;}
+.today-inout-table th,.today-inout-table td {padding:9px 10px;border:1px solid #91b4c1;text-align:start;}
+.today-inout-table th {background:#c1dfe9;color:#183c50;font-size:11px;}
+.today-inout-table td {background:#e2f1f6;color:#183c50;}
+.inout-badge {display:inline-block;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;}
+.inout-in {background:#c7efdc;color:#075c3f;}
+.inout-out {background:#d5e5ff;color:#234982;}
+[data-theme="dark"] .today-inout-report {color:#e1edf2;}
+[data-theme="dark"] #refresh-today-inout {background:#294552;color:#e1edf2;border-color:#53717f;}
+[data-theme="dark"] #today-inout-status,[data-theme="dark"] .today-inout-report>small {color:#b5c9d3;}
+[data-theme="dark"] .today-inout-table th {background:#294552;color:#e1edf2;border-color:#53717f;}
+[data-theme="dark"] .today-inout-table td {background:#233943;color:#e1edf2;border-color:#53717f;}
+[data-theme="dark"] .inout-in {background:#153e33;color:#a5f3cf;}
+[data-theme="dark"] .inout-out {background:#1b3655;color:#b9d8ff;}

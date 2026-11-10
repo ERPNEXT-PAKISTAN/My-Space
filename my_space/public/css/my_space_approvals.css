@@ -1,0 +1,185 @@
+/* My Space's Approvals tab. The welcome page owns all surfaces and palette. */
+.msa-app {--msa-ink:var(--welcome-navy,#143b51);--msa-muted:#526c7a;--msa-border:#9bd6e2;--msa-surface:#e9faff;--msa-soft:#dff5fa;--msa-on-brand:#fff;color:var(--msa-ink);font:inherit;min-width:0;}
+body[data-theme="dark"] .msa-app {--msa-ink:#e1edf2;--msa-muted:#a0b1ba;--msa-border:#344c58;--msa-surface:#1c2a33;--msa-soft:#223640;--msa-on-brand:#10212b;}
+.msa-app * {box-sizing:border-box;}
+.msa-app [hidden] {display:none!important;}
+.msa-app button,.msa-app input,.msa-app select {font:inherit;}
+.msa-app button {cursor:pointer;}
+.msa-app button:disabled {opacity:.45;cursor:default;}
+.msa-app :is(button,a,input,select):focus-visible {outline:2px solid var(--factory-brand);outline-offset:3px;}
+.msa-icon {width:15px;height:15px;flex:none;display:inline-block;vertical-align:middle;}
+.msa-toolbar {display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+.msa-btn {display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;border:1px solid var(--msa-border);border-radius:7px;padding:8px 11px;color:var(--msa-ink);font-size:11px!important;line-height:1.4;}
+.msa-btn:hover {background:var(--factory-brand-tint);border-color:var(--factory-brand);color:var(--factory-brand);}
+.msa-primary {background:var(--factory-brand);border-color:var(--factory-brand);color:var(--msa-on-brand);}
+.msa-primary:hover {background:var(--factory-brand-hover);color:var(--msa-on-brand);}
+.msa-section {padding:18px 0;border-top:1px solid var(--msa-border);}
+.msa-section-heading {display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.msa-section-heading h3 {font-size:14px;font-weight:700;margin:0;color:inherit;}
+.msa-section-heading :is(small,span) {font-size:10px;color:var(--msa-muted);}
+.msa-section-heading h3 small {display:block;margin-top:4px;overflow-wrap:anywhere;}
+.msa-tabs {display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.msa-tab {display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--msa-border);border-radius:7px;color:var(--msa-muted);background:transparent;font-size:11px!important;}
+.msa-tab.active,.msa-tab:hover {background:var(--factory-brand-tint);color:var(--factory-brand);border-color:var(--factory-brand);}
+.msa-module-icon {display:inline-flex;}
+.msa-module-count {font-size:9px;opacity:.7;}
+.msa-stage-heading {margin-top:8px;}
+.msa-stage-heading h3 {font-size:12px;}
+.msa-flow {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.msa-step {display:flex;flex-direction:column;gap:7px;padding:12px;text-align:left;border:1px solid var(--msa-border);border-radius:9px;background:var(--msa-surface);color:var(--msa-ink);min-width:0;}
+.msa-step.active,.msa-step:hover:not(:disabled) {border-color:var(--factory-brand);background:var(--factory-brand-tint);}
+.msa-step-heading {display:flex;align-items:center;gap:7px;font-size:11px;font-weight:650;}
+.msa-step-marker {font-size:10px;color:var(--factory-brand);}
+.msa-step-name {overflow-wrap:anywhere;}
+.msa-step-count {display:flex;flex-wrap:wrap;gap:5px;font-size:10px;color:var(--msa-muted);}
+.msa-step-count strong {font-weight:400;}
+.msa-step-drafts {color:var(--factory-warning);}
+.msa-step-selected {margin-left:auto;font-size:0;}
+.msa-step-selected:after {content:'✓';font-size:12px;color:var(--factory-brand);}
+.msa-filter-panel {border-top:1px solid var(--msa-border);border-bottom:1px solid var(--msa-border);padding:14px 0;}
+.msa-filter-panel summary {display:flex;align-items:center;gap:7px;cursor:pointer;font-size:12px;font-weight:650;list-style:none;}
+.msa-filter-panel summary:after {content:'+';margin-left:auto;color:var(--factory-brand);}
+.msa-filter-panel[open] summary:after {content:'−';}
+.msa-filter-panel summary small {font-size:10px;color:var(--msa-muted);font-weight:400;}
+.msa-filterbar {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px;align-items:end;}
+.msa-filterbar label {display:flex;flex-direction:column;gap:5px;margin:0;color:var(--msa-muted);font-size:11px;min-width:0;}
+.msa-search-field {grid-column:1/-1;}
+.msa-filterbar :is(input,select) {width:100%;min-width:0;padding:9px;border:1px solid var(--msa-border);border-radius:7px;background:var(--msa-surface);color:var(--msa-ink);font-size:12px;}
+.msa-journey-summary {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px;}
+.msa-summary-value {display:flex;flex-wrap:wrap;align-items:center;gap:5px;font-size:10px;color:var(--msa-muted);}
+.msa-summary-value strong {color:var(--msa-ink);}
+.msa-summary-tick {color:var(--factory-success);}
+.msa-documents {border-top:0;}
+.msa-work-views {display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.msa-work-views button {border:0;border-bottom:2px solid transparent;background:transparent;color:var(--msa-muted);padding:8px 7px;font-size:11px!important;}
+.msa-work-views button.active {border-color:var(--factory-brand);color:var(--factory-brand);font-weight:700;}
+.msa-document-card {display:flex;justify-content:space-between;align-items:start;gap:12px;padding:13px 0;border-bottom:1px solid var(--msa-border);}
+.msa-document-card.msa-selected {border-left:3px solid var(--factory-brand);padding-left:10px;}
+.msa-document-main {min-width:0;flex:1;}
+.msa-doc {display:block;text-align:left;background:transparent;border:0;color:var(--factory-brand);font-size:12px!important;font-weight:700!important;padding:0;overflow-wrap:anywhere;}
+.msa-document-main :is(small,.msa-subcell) {display:block;color:var(--msa-muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere;}
+.msa-document-meta {display:flex;flex-direction:column;align-items:end;gap:7px;max-width:40%;font-size:11px;text-align:right;}
+.msa-document-meta strong {font-size:11px;}
+.msa-status {font-size:10px;color:var(--msa-muted);}
+.msa-status.draft,.msa-status.task-open {color:var(--factory-warning);}
+.msa-status.submitted,.msa-status.checkin {color:var(--factory-success);}
+.msa-status.cancelled {color:var(--factory-danger);}
+.msa-review-button {border:0;padding:2px 0;color:var(--factory-brand);}
+.msa-list-foot {display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:12px;}
+.msa-list-foot small {font-size:10px;color:var(--msa-muted);}
+.msa-error {padding:12px;border:1px solid var(--factory-danger);border-radius:8px;color:var(--factory-danger);font-size:12px;}
+.my-space-loading {padding:18px 0;color:inherit;font-size:12px;}
+@media(max-width:480px) {.msa-flow,.msa-filterbar {grid-template-columns:minmax(0,1fr);}.msa-section-heading>span {display:none;}.msa-document-card {gap:8px;}}
+
+/* Approvals uses the former personnel-card column for the live Review. */
+.welcome-layout>.welcome-guide[hidden],#my-space-review-slot[hidden] {display:none!important;}
+.welcome-layout[data-review-active="true"] {grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);}
+#my-space-review-slot {min-width:0;border:1px solid var(--msa-border);border-radius:12px;padding:18px;background:var(--msa-surface);}
+#my-space-review-slot>.msa-review-panel {padding:0;border-top:0;}
+#my-space-review-slot .msa-section-heading h3 {font-size:18px;}
+.msa-app {--text-color:var(--msa-ink);--text-muted:var(--msa-muted);--border-color:var(--msa-border);--card-bg:var(--msa-surface);--bg-color:var(--msa-surface);--control-bg:var(--msa-soft);--subtle-fg:var(--msa-soft);--msa-line:var(--msa-border);--red-700:var(--factory-danger);}
+@media(max-width:800px) {
+ .welcome-layout[data-review-active="true"] {grid-template-columns:minmax(0,1fr);}
+ .welcome-layout[data-review-active="true"]>.welcome-content {order:1;}
+ .welcome-layout[data-review-active="true"]>#my-space-review-slot {order:2;}
+}
+
+/* Left: tools and filters. Right: entries with their selected review directly below. */
+#my-space-review-slot .panel-intro {padding-top:0;}
+#my-space-review-slot .panel-intro h2 {font-size:22px;}
+#my-space-review-slot .msa-work-views {margin-top:15px;}
+.msa-review-parking[hidden] {display:none!important;}
+.msa-app .msa-document-card {display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;}
+.msa-app .msa-document-meta {max-width:none;}
+.msa-entry-review {grid-column:1/-1;min-width:0;width:100%;}
+.msa-entry-review:empty {display:none;}
+.msa-entry-review>.msa-review-panel {margin-top:8px;padding:15px;border:1px solid var(--msa-border);border-radius:10px;background:var(--msa-surface);}
+.msa-entry-review .msa-section-heading h3 {font-size:14px;}
+.msa-entry-review .msr-root {min-height:0;}
+@media(max-width:800px) {
+ .welcome-layout[data-review-active="true"]>#my-space-review-slot {order:1;}
+ .welcome-layout[data-review-active="true"]>.welcome-content {order:2;}
+}
+/* Match the original ID-card column, leaving the larger column for documents. */
+.welcome-layout[data-review-active="true"] {grid-template-columns:minmax(260px,.8fr) minmax(0,1.45fr);}
+@media(max-width:800px) {.welcome-layout[data-review-active="true"] {grid-template-columns:minmax(0,1fr);}}
+#my-space-review-slot .msa-controls .msa-section-heading h3 {font-size:13px;}
+#my-space-review-slot .msa-controls .msa-stage-heading h3 {font-size:12px;}
+#my-space-review-slot .msa-controls .panel-intro h2 {font-size:20px;}
+/* Distinct control sections within the original narrow personnel-card column. */
+.welcome-page #my-space-review-slot {padding:14px;background:var(--msa-soft);border-color:var(--msa-border);}
+.msa-controls-heading {padding:6px 4px 16px;}
+#my-space-review-slot .msa-controls .msa-controls-heading h2 {font-size:24px;line-height:1.2;letter-spacing:-.5px;margin:8px 0;}
+.msa-controls-heading p {font-size:12px;line-height:1.6;margin:0;}
+.msa-controls .msa-toolbar {display:grid;grid-template-columns:1fr 1fr;margin-bottom:16px;}
+.msa-controls .msa-toolbar .msa-btn {background:var(--msa-surface);min-height:36px;}
+.msa-controls .msa-control-card {padding:14px;margin:0 0 12px;border:1px solid var(--msa-border);border-radius:11px;background:var(--msa-surface);}
+.msa-controls .msa-control-card:last-child {margin-bottom:0;}
+.msa-section-number {display:inline-grid!important;place-items:center;flex:none;width:23px;height:23px;margin-right:5px;border:1px solid var(--msa-border);border-radius:7px;background:var(--msa-soft);color:var(--msa-ink)!important;font-size:10px!important;font-weight:700;letter-spacing:0;}
+.msa-controls .msa-section-heading h3 {display:flex;align-items:center;gap:3px;}
+.msa-controls .msa-tabs {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:0;}
+.msa-controls .msa-tab {width:100%;min-width:0;gap:5px;padding:8px 6px;background:var(--msa-soft);font-size:10px!important;text-align:left;}
+.msa-controls .msa-tab .msa-module-count {margin-left:auto;}
+.msa-controls .msa-tab.active {border-color:var(--factory-brand);box-shadow:inset 3px 0 var(--factory-brand);background:var(--factory-brand-tint);}
+.msa-card-label {display:block;font-size:9px;color:var(--msa-muted);letter-spacing:1px;font-weight:700;margin-bottom:5px;}
+.msa-controls .msa-stage-heading {margin-top:0;align-items:start;}
+#my-space-review-slot .msa-controls .msa-stage-heading h3 {font-size:11px;line-height:1.5;margin:0;}
+.msa-controls .msa-stage-heading>.msa-btn {font-size:10px!important;white-space:normal;padding:7px;}
+.msa-controls .msa-flow {gap:6px;}
+.msa-controls .msa-step {padding:9px;background:var(--msa-soft);}
+.msa-controls .msa-step-heading {font-size:10px;gap:4px;}
+.msa-controls .msa-step.active {background:var(--factory-brand-tint);}
+.msa-controls .msa-filter-panel summary {flex-wrap:wrap;gap:5px;font-size:12px;}
+.msa-controls .msa-filter-panel summary small {width:100%;padding-left:32px;}
+.msa-controls .msa-filter-panel summary:after {position:absolute;right:14px;top:17px;}
+.msa-controls .msa-filter-panel {position:relative;}
+.msa-controls .msa-work-views {display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0!important;}
+.msa-controls .msa-work-views button {padding:9px 7px;text-align:left;border:1px solid var(--msa-border);border-radius:7px;background:var(--msa-soft);font-size:10px!important;}
+.msa-controls .msa-work-views button.active {background:var(--factory-brand-tint);border-color:var(--factory-brand);box-shadow:inset 3px 0 var(--factory-brand);}
+/* A clear review header separates the entry summary from its detailed content. */
+.msa-entry-review>.msa-review-panel {padding:0;overflow:visible;border:1px solid var(--msa-border);border-radius:12px;background:var(--msa-surface);}
+.msa-inline-review-heading {padding:14px 16px;margin:0;border-bottom:1px solid var(--msa-border);border-radius:12px 12px 0 0;background:var(--msa-soft);align-items:center;}
+.msa-inline-review-heading h3 {margin:0;font-size:16px!important;}
+.msa-inline-review-heading h3 small {font-size:11px;line-height:1.5;margin-top:5px;}
+.msa-inline-review-heading .msa-card-label {color:var(--msa-muted);font-size:9px;}
+.msa-entry-review #msa-review {padding:10px 14px 14px;}
+/* Keep business status distinct from the ERP document lifecycle. */
+.msa-entry-statuses {display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
+.msa-entry-statuses>span {display:flex;flex-direction:column;gap:3px;font-size:11px;}
+.msa-entry-statuses small {font-size:9px;color:var(--msa-muted);font-weight:400;}
+.msa-entry-statuses b {font-size:11px;font-weight:650;}
+.welcome-page .msa-app .msa-review-button {display:inline-flex;align-items:center;gap:7px;padding:8px 13px;background:#075477;color:#fff;border:1px solid #075477;border-radius:8px;font-weight:700;box-shadow:0 2px 5px #031c3020;}
+.welcome-page .msa-app .msa-review-button:after {content:'⌄';font-size:14px;line-height:1;}
+.welcome-page .msa-app .msa-review-button[aria-expanded="true"]:after {content:'⌃';}
+.welcome-page .msa-app .msa-review-button:hover {background:#033955;border-color:#033955;color:#fff;}
+.welcome-page[data-theme="dark"] .msa-app .msa-review-button {background:#7db8ff;color:#10212b;border-color:#a9d3ff;}
+.welcome-page[data-theme="dark"] .msa-app .msa-review-button:hover {background:#a9d3ff;color:#10212b;}
+@media(max-width:480px) {.msa-entry-statuses {flex-direction:column;gap:6px;}}
+/* Labeled chips distinguish business status from submission status. */
+.msa-entry-statuses {gap:9px;}
+.msa-entry-statuses>span {align-items:flex-end;gap:5px;}
+.msa-entry-statuses b {display:inline-block;padding:5px 9px;border:1px solid var(--msa-badge-border);border-radius:6px;background:var(--msa-badge-bg);color:var(--msa-badge-ink);font-size:10px;line-height:1.3;}
+.msa-tone-warning {--msa-badge-bg:#fef3c7;--msa-badge-ink:#713f12;--msa-badge-border:#d6a53f;}
+.msa-tone-success {--msa-badge-bg:#d1fae5;--msa-badge-ink:#065f46;--msa-badge-border:#63bda2;}
+.msa-tone-danger {--msa-badge-bg:#fee2e2;--msa-badge-ink:#991b1b;--msa-badge-border:#e29898;}
+.msa-tone-info {--msa-badge-bg:#dbeafe;--msa-badge-ink:#1e40af;--msa-badge-border:#8faee5;}
+.msa-tone-muted {--msa-badge-bg:#e2e8f0;--msa-badge-ink:#334155;--msa-badge-border:#94a3b8;}
+[data-theme="dark"] .msa-tone-warning {--msa-badge-bg:#49391a;--msa-badge-ink:#ffe09b;--msa-badge-border:#a28344;}
+[data-theme="dark"] .msa-tone-success {--msa-badge-bg:#153e33;--msa-badge-ink:#a5f3cf;--msa-badge-border:#428e73;}
+[data-theme="dark"] .msa-tone-danger {--msa-badge-bg:#4a252c;--msa-badge-ink:#ffc1ca;--msa-badge-border:#b16776;}
+[data-theme="dark"] .msa-tone-info {--msa-badge-bg:#1b3655;--msa-badge-ink:#b9d8ff;--msa-badge-border:#527ca8;}
+[data-theme="dark"] .msa-tone-muted {--msa-badge-bg:#2b3b47;--msa-badge-ink:#d2e0e8;--msa-badge-border:#647b8b;}
+.msa-document-list {display:grid;gap:12px;}
+.msa-app .msa-document-card {padding:14px;border:1px solid var(--msa-border);border-radius:10px;background:var(--msa-surface);gap:12px;}
+.msa-app .msa-document-card.msa-selected {padding:14px;border:1px solid var(--factory-brand);box-shadow:0 0 0 1px var(--factory-brand);}
+.msa-app {--msa-table-head:#c1dfe9;--msa-table-stripe:#d7ebf2;--msa-grid:#8eafb9;}
+body[data-theme="dark"] .msa-app {--msa-table-head:#294552;--msa-table-stripe:#233943;--msa-grid:#53717f;}
+
+/* Keep both document statuses directly below the document date. */
+.msa-document-main .msa-entry-statuses {flex-direction:row;flex-wrap:nowrap;justify-content:flex-start;gap:8px;margin-top:10px;}
+.msa-document-main .msa-entry-statuses>span {align-items:flex-start;min-width:0;flex:0 1 auto;}
+.msa-document-main .msa-entry-statuses small {white-space:nowrap;}
+.msa-document-main .msa-entry-statuses b {max-width:100%;box-sizing:border-box;overflow-wrap:anywhere;}
+
+.msa-filterbar input[type="date"] {color-scheme:light;}
+[data-theme="dark"] .msa-filterbar input[type="date"] {color-scheme:dark;}

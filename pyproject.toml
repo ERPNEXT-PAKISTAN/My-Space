@@ -1,9 +1,9 @@
 [project]
-name = "arabic"
+name = "my_space"
 authors = [
-    { name = "Arabic", email = "admin@example.com"}
+    { name = "My Space", email = "admin@example.com"}
 ]
-description = "Arabic application"
+description = "My Space: workspace, attendance, approvals and business reporting"
 requires-python = ">=3.14"
 readme = "README.md"
 dynamic = ["version"]

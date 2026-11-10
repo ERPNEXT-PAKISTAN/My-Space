@@ -17,13 +17,13 @@
     if (document.body.dataset.preview === 'true') return;
     themeButton.disabled = true;
     try {
-      const response = await fetch('/api/method/flow.flow.page.fui.fui.set_flow_theme', {
+      const response = await fetch('/api/method/my_space.preferences.set_theme', {
         method: 'POST', credentials: 'same-origin',
         headers: {'Content-Type': 'application/json', 'X-Frappe-CSRF-Token': $('#welcome-csrf').value},
         body: JSON.stringify({theme})
       });
-      if (!response.ok) throw new Error('Could not save your Flow theme. Please try again.');
-      try { localStorage.setItem('factory_theme', theme); } catch {}
+      if (!response.ok) throw new Error('Could not save your My Space theme. Please try again.');
+      try { localStorage.setItem('my_space_theme', theme); } catch {}
     } catch (error) {
       document.body.dataset.theme = previous;
       setThemeButton();
@@ -93,7 +93,7 @@
     buttons.forEach(item => { item.disabled = true; });
     status.textContent = `${button.dataset.action} in progress…`;
     try {
-      const response = await fetch('/api/method/flow.www.factory_welcome.apply_expense_claim_action', {
+      const response = await fetch('/api/method/my_space.www.welcomes.apply_expense_claim_action', {
         method: 'POST', credentials: 'same-origin',
         headers: {'Content-Type': 'application/json', 'X-Frappe-CSRF-Token': $('#welcome-csrf').value, 'Accept': 'application/json'},
         body: JSON.stringify({claim_name: button.dataset.claimName, action: button.dataset.claimAction, approval_status: button.dataset.approvalStatus})
@@ -162,7 +162,7 @@
       }
       status.textContent = 'Recording your employee check-in…';
       timeout = setTimeout(() => abort.abort(),15000);
-      const response = await fetch('/api/method/flow.www.factory_welcome.mark_employee_checkin', {
+      const response = await fetch('/api/method/my_space.www.welcomes.mark_employee_checkin', {
         method:'POST',credentials:'same-origin',signal:abort.signal,body:JSON.stringify(coordinates),headers:{'Content-Type':'application/json','X-Frappe-CSRF-Token':$('#welcome-csrf').value,'Accept':'application/json'}
       });
       const data = await response.json();
@@ -247,7 +247,7 @@
       if(document.body.dataset.preview==='true'){status.textContent='Preview only. Live employee events appear after signing in.';return;}
       const abort=new AbortController(), timer=setTimeout(()=>abort.abort(),15000);
       try {
-        const response=await fetch('/api/method/flow.www.factory_welcome.get_today_checkins',{method:'POST',credentials:'same-origin',signal:abort.signal,headers:{'X-Frappe-CSRF-Token':$('#welcome-csrf').value,'Accept':'application/json'}});
+        const response=await fetch('/api/method/my_space.www.welcomes.get_today_checkins',{method:'POST',credentials:'same-origin',signal:abort.signal,headers:{'X-Frappe-CSRF-Token':$('#welcome-csrf').value,'Accept':'application/json'}});
         if(!response.ok)throw new Error('Unable to load your IN / OUT report. Use Refresh to retry.');
         const payload=(await response.json()).message;
         if(!payload||!Array.isArray(payload.events))throw new Error('No check-in details received. Use Refresh to retry.');
@@ -280,7 +280,7 @@
     if (document.body.dataset.preview === 'true') {status.textContent='Preview only. Live employee events appear here after signing in.';return;}
     const abort=new AbortController(), timer=setTimeout(()=>abort.abort(),15000);
     try {
-      const response=await fetch('/api/method/flow.www.factory_welcome.get_today_checkins',{method:'POST',credentials:'same-origin',signal:abort.signal,headers:{'X-Frappe-CSRF-Token':$('#welcome-csrf').value,'Accept':'application/json'}});
+      const response=await fetch('/api/method/my_space.www.welcomes.get_today_checkins',{method:'POST',credentials:'same-origin',signal:abort.signal,headers:{'X-Frappe-CSRF-Token':$('#welcome-csrf').value,'Accept':'application/json'}});
       if (!response.ok) throw new Error('Could not load your check-ins. Close and reopen to retry.');
       const payload=(await response.json()).message;
       if (!payload || !Array.isArray(payload.events)) throw new Error('No check-in details received. Please retry.');
@@ -300,7 +300,7 @@
     try {
       const response = await fetch('/api/method/logout', {method:'POST',credentials:'same-origin',signal:abort.signal,headers:{'X-Frappe-CSRF-Token':$('#welcome-csrf').value}});
       if (!response.ok) throw new Error('Sign out failed');
-      location.replace('/factory-login');
+      location.replace('/login?redirect-to=%2Fwelcomes');
     } catch { $('#welcome-status').textContent = 'Could not sign out. Please check your connection and try again.'; button.disabled = false; }
     finally { clearTimeout(timeout); }
   });

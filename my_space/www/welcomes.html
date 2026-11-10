@@ -7,9 +7,9 @@
   <link rel="icon" type="image/svg+xml" href="/assets/my_space/images/my-space-check.svg">
   <script>window._version_number = {{ my_space_build_version | tojson }};</script>
   {{ include_style('website.bundle.css') }}
-  <link rel="stylesheet" href="{{ factory_assets.login_css if factory_assets else '/assets/flow/css/factory_login.css' }}">
-  <link rel="stylesheet" href="{{ factory_assets.welcome_css if factory_assets else '/assets/flow/css/factory_welcome.css' }}">
-  <link rel="stylesheet" href="{{ factory_assets.theme_css if factory_assets else '/assets/flow/css/factory_theme.css' }}">
+  <link rel="stylesheet" href="{{ factory_assets.login_css if factory_assets else '/assets/my_space/css/welcome_base.css' }}">
+  <link rel="stylesheet" href="{{ factory_assets.welcome_css if factory_assets else '/assets/my_space/css/welcome_layout.css' }}">
+  <link rel="stylesheet" href="{{ factory_assets.theme_css if factory_assets else '/assets/my_space/css/welcome_theme.css' }}">
   <style>
     .welcome-content {min-width:0;}
     #panel-approvals[hidden] {display:none;}
@@ -41,7 +41,7 @@
             <div class="pass-bottom"><span>{{ (profile.employee.branch if profile.employee and profile.employee.branch else "Branch not assigned")|e }}</span><span aria-hidden="true">▥ ▥ ▥ ▥</span></div>
           </div>
 <div class="guide-copy"><p id="guide-caption">Your pass is ready.</p></div>
-        {% include "templates/includes/factory_supervisor.html" %}
+        {% include "templates/includes/my_space_supervisor.html" %}
         <div class="guide-walkway" aria-hidden="true"><i>01</i><i>02</i><i>03</i></div>
         <p class="guide-hint">Click Marcus for a little encouragement.</p>
       </aside>

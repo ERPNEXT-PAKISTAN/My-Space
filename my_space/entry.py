@@ -54,7 +54,7 @@ def assets():
 
 def page_context(context, kind):
     if frappe.session.user == 'Guest':
-        frappe.local.flags.redirect_location = '/factory-login?redirect-to=' + quote('/my-space-' + kind, safe='')
+        frappe.local.flags.redirect_location = '/login?redirect-to=' + quote('/my-space-' + kind, safe='')
         raise frappe.Redirect
     spec = require_access(kind)
     context.no_header = context.no_cache = True
@@ -72,7 +72,8 @@ def page_context(context, kind):
     if name:
         context.entry_boot['document'] = _document_result(kind, existing)
     context.csrf_token = frappe.sessions.get_csrf_token()
-    context.flow_theme = frappe.defaults.get_user_default('flow_theme') or 'light'
+    from my_space.preferences import get_theme
+    context.flow_theme = get_theme()
     return context
 
 

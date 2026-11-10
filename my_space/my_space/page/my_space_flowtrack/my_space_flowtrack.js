@@ -13,6 +13,7 @@ frappe.pages['my-space-flowtrack'].on_page_load = function (wrapper) {
 	const page = frappe.ui.make_app_page({ parent: wrapper, title: __('FlowTrack'), single_column: true });
 	page.body.append(frappe.render_template('my_space_flowtrack', {}));
 	const root = page.body.find('.ft-app').get(0);
+	root.classList.add('msa-app');
 	const $ = (s) => root.querySelector(s);
 	const esc = frappe.utils.escape_html;
 	const API = 'my_space.my_space.page.my_space_flowtrack.my_space_flowtrack.';
@@ -27,9 +28,9 @@ frappe.pages['my-space-flowtrack'].on_page_load = function (wrapper) {
 	root.querySelectorAll('[data-ft-icon]').forEach(el=>el.innerHTML=icon(el.dataset.ftIcon));
 	let review;
 	const reviewReady = new Promise((resolve, reject) => {
-		frappe.require(['/assets/flow/css/flowtrack_review.css', '/assets/flow/js/flowtrack_review.js'], () => {
+		frappe.require(['/assets/my_space/css/my_space_approvals.css', '/assets/my_space/css/my_space_review.css', '/assets/my_space/js/my_space_review.js'], () => {
 			try {
-				review = new window.FlowTrackReview($('#ft-review'), {
+				review = new window.MySpaceReview($('#ft-review'), {
 					onRefresh: () => {state.start=0;return loadDocuments(state.recentMode);},
 					onSelect: row => {
 						$('#ft-review-entry').textContent='· '+row.name;

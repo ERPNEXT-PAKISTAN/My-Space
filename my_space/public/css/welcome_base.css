@@ -1,0 +1,1519 @@
+/* ==========================================================================
+   Factory Entrance Login - Believable Industrial Aesthetic
+   Security Cabin & Production Entrance Overhaul
+   ========================================================================== */
+
+:root {
+  --bg-dark-950: #0a0d13;
+  --bg-dark-900: #10141d;
+  --bg-dark-800: #171d28;
+  --bg-dark-700: #202736;
+  --bg-cabin: #1c2331;
+  --steel-border: #2e3849;
+  --steel-light: #445166;
+  --hazard-yellow: #f59e0b;
+  --hazard-warm: #d97706;
+  --safety-green: #10b981;
+  --safety-green-glow: rgba(16, 185, 129, 0.4);
+  --scanner-amber: #f59e0b;
+  --scanner-amber-glow: rgba(245, 158, 11, 0.4);
+  --safety-red: #ef4444;
+  --safety-red-glow: rgba(239, 68, 68, 0.4);
+  --walkway-yellow: #ca8a04;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --industrial-mono: 'JetBrains Mono', 'SF Mono', Consolas, 'Roboto Mono', monospace;
+  --sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark-950);
+  color: var(--text-main);
+  font-family: var(--sans-font);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Full Viewport Architecture
+   ========================================================================== */
+.factory-universe {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse at 40% 15%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #0d1118 0%, #131924 100%);
+  position: relative;
+}
+
+/* Header: Clean Plant Status Bar */
+.factory-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.75rem;
+  background: #111620;
+  border-bottom: 1.5px solid var(--steel-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  z-index: 50;
+}
+
+.plant-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.plant-badge-logo {
+  width: 34px;
+  height: 34px;
+  background: #1a2230;
+  border: 1px solid var(--hazard-yellow);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plant-badge-logo svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--hazard-yellow);
+}
+
+.plant-titles h1 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  letter-spacing: 0.3px;
+}
+
+.plant-titles h1 .tag-erp {
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 3px;
+  font-weight: 800;
+}
+
+.plant-titles p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--industrial-mono);
+}
+
+.plant-live-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--industrial-mono);
+  font-size: 0.76rem;
+}
+
+.clock-display {
+  color: var(--text-muted);
+  background: #090c12;
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--steel-border);
+}
+
+.audio-toggle-btn {
+  background: #171f2b;
+  border: 1px solid var(--steel-border);
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  transition: all 0.2s;
+}
+
+.audio-toggle-btn:hover { color: #fff; }
+.audio-toggle-btn.sound-on { color: var(--hazard-yellow); border-color: var(--hazard-yellow); }
+
+/* ==========================================================================
+   Main Arena: Security Cabin Scene (Left) + Clean Login Form (Right)
+   ========================================================================== */
+.factory-arena {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  min-height: calc(100vh - 54px);
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .factory-arena {
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+}
+
+/* ==========================================================================
+   Left Side: Believable Factory Entrance Scene
+   ========================================================================== */
+.factory-viewport {
+  position: relative;
+  background: linear-gradient(180deg, #0e121a 0%, #151a24 70%, #1a202c 100%);
+  border-right: 2px solid var(--steel-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+@media (max-width: 960px) {
+  .factory-viewport {
+    height: 320px;
+    border-right: none;
+    border-top: 2px solid var(--steel-border);
+  }
+}
+
+/* Factory Structural Roof & Skylights (Background) */
+.scene-background-factory {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Overhead Steel Trusses & Skylights */
+.roof-structure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 140px,
+    rgba(255, 255, 255, 0.02) 140px,
+    rgba(255, 255, 255, 0.02) 144px
+  );
+  border-bottom: 2px solid rgba(255, 255, 255, 0.04);
+}
+
+.high-bay-lamp {
+  position: absolute;
+  top: 15px;
+  width: 22px;
+  height: 12px;
+  background: #334155;
+  border-radius: 4px 4px 0 0;
+}
+.high-bay-lamp::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -20px;
+  width: 62px;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(254, 240, 138, 0.12), transparent);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+}
+.lamp-1 { left: 22%; }
+.lamp-2 { left: 65%; }
+
+/* Slow Industrial Ceiling Ventilation Fans */
+.vent-fan {
+  position: absolute;
+  top: 18px;
+  right: 18%;
+  width: 38px;
+  height: 38px;
+  opacity: 0.25;
+  animation: fanSpin 6s linear infinite;
+}
+
+@keyframes fanSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Middle Distance: Machine Bay (Slitter & Pallets) */
+.middle-machine-bay {
+  position: absolute;
+  bottom: 85px;
+  left: 45%;
+  width: 320px;
+  height: 120px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Steel Coil Pallets */
+.pallet-stack {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  width: 80px;
+  height: 45px;
+}
+.pallet-wood {
+  width: 100%;
+  height: 8px;
+  background: #78350f;
+  margin-top: 2px;
+}
+.steel-coil {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0f172a 35%, #475569 40%, #94a3b8 80%, #334155 100%);
+  display: inline-block;
+  margin-right: 2px;
+}
+
+/* Background Transport Cart / Trolley Lane */
+.trolley-track {
+  position: absolute;
+  bottom: 95px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.trolley-cart {
+  position: absolute;
+  bottom: 97px;
+  left: -80px;
+  width: 60px;
+  height: 22px;
+  background: #475569;
+  border-radius: 3px;
+  animation: trolleyCross 28s infinite linear;
+}
+.trolley-cart::before, .trolley-cart::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0f172a;
+}
+.trolley-cart::before { left: 8px; }
+.trolley-cart::after { right: 8px; }
+
+@keyframes trolleyCross {
+  0% { left: -80px; opacity: 0; }
+  5% { opacity: 0.5; }
+  45% { left: 105%; opacity: 0.5; }
+  100% { left: 105%; opacity: 0; }
+}
+
+/* Concrete Scuffed Floor & Walkway Markings */
+.factory-ground {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(180deg, #1e2634 0%, #141a24 100%);
+  border-top: 3px solid #334155;
+  z-index: 15;
+  box-shadow: inset 0 8px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Yellow Painted Pedestrian Walkway Line */
+.pedestrian-walkway-line {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--walkway-yellow),
+    var(--walkway-yellow) 40px,
+    transparent 40px,
+    transparent 70px
+  );
+  opacity: 0.75;
+}
+
+/* Safety Sign on Wall */
+.cabin-wall-sign {
+  position: absolute;
+  top: 110px;
+  left: 20px;
+  background: #0f172a;
+  border: 2px solid var(--hazard-yellow);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--industrial-mono);
+  font-size: 0.65rem;
+  color: var(--hazard-yellow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  z-index: 20;
+}
+.cabin-wall-sign:hover { transform: rotate(-1.5deg); }
+
+/* ==========================================================================
+   Pedestrian Turnstile Swing Gate & Badge Scanner
+   ========================================================================== */
+.entrance-gate-checkpoint {
+  position: absolute;
+  bottom: 85px;
+  left: 48%;
+  width: 140px;
+  height: 125px;
+  z-index: 22;
+}
+
+/* RFID Badge Scanner Pillar */
+.rfid-scanner-pillar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 22px;
+  height: 95px;
+  background: linear-gradient(180deg, #334155, #1e293b);
+  border: 2px solid #475569;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.scanner-target-pad {
+  width: 14px;
+  height: 20px;
+  background: #0f172a;
+  border: 1px solid #64748b;
+  border-radius: 2px;
+  position: relative;
+}
+
+.scanner-indicator-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--safety-red);
+  box-shadow: 0 0 6px var(--safety-red);
+  margin-top: 6px;
+  transition: all 0.3s;
+}
+
+/* Scanner Light States */
+.scanner-authenticating .scanner-indicator-light {
+  background: var(--scanner-amber);
+  box-shadow: 0 0 10px var(--scanner-amber);
+  animation: beaconPulse 0.5s infinite alternate;
+}
+
+.scanner-granted .scanner-indicator-light {
+  background: var(--safety-green);
+  box-shadow: 0 0 12px var(--safety-green);
+}
+
+/* Pedestrian Swing Barrier Bar */
+.turnstile-swing-arm {
+  position: absolute;
+  bottom: 45px;
+  left: 22px;
+  width: 80px;
+  height: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    #f59e0b,
+    #f59e0b 8px,
+    #1e293b 8px,
+    #1e293b 16px
+  );
+  border: 1.5px solid #0f172a;
+  border-radius: 4px;
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.gate-open .turnstile-swing-arm {
+  transform: rotate(-80deg);
+}
+
+/* ==========================================================================
+   Marcus: Articulated Believable Factory Supervisor
+   ========================================================================== */
+.marcus-stage {
+  position: absolute;
+  bottom: 82px;
+  left: 20%;
+  width: 200px;
+  height: 310px;
+  z-index: 25;
+  transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s ease;
+  cursor: pointer;
+}
+
+/* Realistic Ground Shadow */
+.marcus-floor-shadow {
+  position: absolute;
+  bottom: -4px;
+  left: 55px;
+  width: 90px;
+  height: 14px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+}
+
+.marcus-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.45));
+}
+
+/* Irregular Natural Blink */
+.char-eyelids {
+  animation: naturalBlink 5.2s infinite;
+  transform-origin: 100px 92px;
+}
+
+@keyframes naturalBlink {
+  0%, 94%, 98%, 100% { transform: scaleY(0); }
+  96% { transform: scaleY(1); }
+}
+
+/* Pupil Micro-Movements */
+.char-pupils {
+  transition: transform 0.12s ease-out;
+}
+
+/* Natural Torso Breathing */
+.char-torso-group {
+  animation: naturalBreathe 4s infinite ease-in-out;
+  transform-origin: 100px 170px;
+}
+
+@keyframes naturalBreathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+
+/* Leg Rigging */
+.char-leg-left, .char-leg-right {
+  transform-origin: top center;
+  transition: transform 0.3s ease;
+}
+
+/* Arm Rigging */
+.char-arm-left {
+  transform-origin: 72px 132px;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.char-forearm-left {
+  transform-origin: 62px 165px;
+  transition: transform 0.3s ease;
+}
+
+.char-arm-right {
+  transform-origin: 128px 132px;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.char-forearm-right {
+  transform-origin: 138px 165px;
+  transition: transform 0.3s ease;
+}
+
+.char-head-group {
+  transform-origin: 100px 105px;
+  transition: transform 0.3s ease-out;
+}
+
+/* ==========================================================================
+   Responsive Login Poses
+   ========================================================================== */
+
+/* 1. Page Load: Subtle friendly wave */
+.marcus-stage.pose-wave .char-arm-right {
+  transform: rotate(-45deg);
+}
+.marcus-stage.pose-wave .char-forearm-right {
+  transform: rotate(-55deg);
+  animation: subtleWave 0.8s 2 ease-in-out;
+}
+@keyframes subtleWave {
+  0%, 100% { transform: rotate(-55deg); }
+  50% { transform: rotate(-35deg); }
+}
+
+/* 2. Username Focused: Looks toward scanner */
+.marcus-stage.pose-look-scanner .char-head-group {
+  transform: rotate(8deg);
+}
+.marcus-stage.pose-look-scanner .char-pupils {
+  transform: translate(3px, 1px);
+}
+.marcus-stage.pose-look-scanner .char-arm-right {
+  transform: rotate(20deg);
+}
+
+/* 3. Password Focused: Politeness / Covers Eyes */
+.marcus-stage.pose-privacy .char-head-group {
+  transform: rotate(-18deg) translateY(2px);
+}
+.marcus-stage.pose-privacy .char-arm-right {
+  transform: rotate(-65deg) translateY(-8px);
+}
+.marcus-stage.pose-privacy .char-forearm-right {
+  transform: rotate(-60deg) translateX(-10px);
+}
+
+/* 4. Show Password Toggled: Turns body further away */
+.marcus-stage.pose-privacy-extreme {
+  transform: scaleX(-1) translateX(-20px);
+}
+
+/* 5. Caps Lock Active: Points to warning notice */
+.marcus-stage.pose-caps-warn .char-arm-right {
+  transform: rotate(-25deg);
+}
+.marcus-stage.pose-caps-warn .char-head-group {
+  transform: rotate(12deg);
+}
+
+/* 6. Submitting: Taps badge scanner */
+.marcus-stage.pose-tap-scanner .char-arm-right {
+  transform: rotate(45deg) translateY(4px);
+}
+.marcus-stage.pose-tap-scanner .char-forearm-right {
+  transform: rotate(25deg);
+}
+
+/* 7. Rejected: Puzzled eyebrow */
+.marcus-stage.pose-puzzled .char-head-group {
+  transform: rotate(-8deg) translateY(-2px);
+}
+
+/* 8. Success: Gestures inside to open gate */
+.marcus-stage.pose-welcome .char-arm-right {
+  transform: rotate(35deg) translateY(2px);
+}
+.marcus-stage.pose-welcome .char-forearm-right {
+  transform: rotate(40deg);
+}
+.marcus-stage.pose-welcome .char-head-group {
+  transform: rotate(6deg);
+}
+
+/* Speech / Reaction Bubble */
+.marcus-dialogue-bubble {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid var(--hazard-yellow);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-family: var(--industrial-mono);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.marcus-dialogue-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: var(--hazard-yellow) transparent;
+  display: block;
+}
+.marcus-dialogue-bubble.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
+}
+
+/* ==========================================================================
+   Right Side: Clean, Pragmatic Everyday Login Panel
+   ========================================================================== */
+.factory-terminal-panel {
+  background: var(--bg-dark-900);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.2rem 2.4rem;
+  border-left: 1.5px solid var(--steel-border);
+  box-shadow: -6px 0 24px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 45;
+}
+
+@media (max-width: 960px) {
+  .factory-terminal-panel {
+    border-left: none;
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.terminal-header {
+  margin-bottom: 1.5rem;
+}
+
+.terminal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 3px 8px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 4px;
+  color: var(--hazard-yellow);
+  font-family: var(--industrial-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.terminal-header h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.terminal-header p {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin-top: 0.2rem;
+}
+
+/* Caps Lock Warning Banner */
+.caps-lock-warning {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 6px 10px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--hazard-yellow);
+  border-radius: 4px;
+  color: #fbbf24;
+  font-size: 0.75rem;
+  font-family: var(--industrial-mono);
+  margin-bottom: 0.85rem;
+}
+.caps-lock-warning.show { display: flex; }
+
+/* Status & Error Announcement Banner */
+.terminal-alert-banner {
+  display: none;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid var(--safety-red);
+  border-radius: 6px;
+  color: #fca5a5;
+  font-size: 0.82rem;
+  margin-bottom: 1.2rem;
+}
+.terminal-alert-banner.show { display: flex; }
+.terminal-alert-banner.alert-success {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--safety-green);
+  color: #6ee7b7;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.form-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+.forgot-password-link {
+  font-size: 0.72rem;
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 500;
+}
+.forgot-password-link:hover { text-decoration: underline; }
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-prefix {
+  position: absolute;
+  left: 12px;
+  color: var(--text-dim);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  width: 100%;
+  height: 42px;
+  background-color: #0b0e14;
+  border: 1.5px solid var(--steel-border);
+  border-radius: 6px;
+  padding: 0 12px 0 38px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: var(--sans-font);
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control::placeholder { color: var(--text-dim); }
+
+.form-control:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
+  border-color: #38bdf8;
+  background-color: #101622;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+}
+.btn-toggle-password:hover { color: var(--text-main); }
+.btn-toggle-password:focus-visible { outline: 2px solid #38bdf8; }
+
+.field-error-msg {
+  display: none;
+  font-size: 0.74rem;
+  color: #f87171;
+  margin-top: 0.35rem;
+  font-family: var(--industrial-mono);
+}
+.form-group.has-error .field-error-msg { display: block; }
+.form-group.has-error .form-control {
+  border-color: var(--safety-red);
+  background-color: rgba(239, 68, 68, 0.04);
+}
+
+/* Attendance Checkbox (Explicit Opt-In) */
+.gate-attendance-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.gate-attendance-toggle input[type="checkbox"] {
+  accent-color: var(--safety-green);
+  width: 15px;
+  height: 15px;
+}
+
+/* Primary Submit Button */
+.btn-factory-submit {
+  width: 100%;
+  height: 46px;
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  border: 1px solid #b45309;
+  border-radius: 6px;
+  color: #0f172a;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-factory-submit:hover:not(:disabled) {
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+  transform: translateY(-1px);
+}
+
+.btn-factory-submit:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.btn-factory-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.btn-factory-submit.loading .btn-spinner { display: inline-block; }
+.btn-factory-submit.loading .btn-label { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Authentic Telemetry Footer */
+.terminal-footer-info {
+  margin-top: 1.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--steel-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  font-family: var(--industrial-mono);
+}
+
+.info-item .info-label {
+  font-size: 0.64rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.info-item .info-val {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.info-val.val-green { color: #34d399; }
+
+/* Successful Entrance Overlay (Brief & Non-blocking) */
+.entrance-unlocked-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 13, 20, 0.92);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  color: #fff;
+  text-align: center;
+}
+.entrance-unlocked-banner.show { display: flex; }
+
+/* ==========================================================================
+   Interactive Employee Mode Trigger & Holographic Security Pass
+   ========================================================================== */
+.employee-entry-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #182232 0%, #111722 100%);
+  border: 1.5px solid #0284c7;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 1.15rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.2);
+}
+
+.employee-entry-trigger:hover {
+  border-color: #38bdf8;
+  background: linear-gradient(135deg, #1e2c40 0%, #151e2c 100%);
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.35);
+}
+
+.employee-entry-trigger .trigger-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.employee-entry-trigger .trigger-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(2, 132, 199, 0.2);
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38bdf8;
+}
+
+.employee-entry-trigger .trigger-text h4 {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+.employee-entry-trigger .trigger-text p {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-family: var(--industrial-mono);
+}
+
+.employee-entry-trigger .trigger-arrow {
+  color: #38bdf8;
+  font-size: 0.85rem;
+  transition: transform 0.2s;
+}
+
+.employee-entry-trigger.open .trigger-arrow {
+  transform: rotate(90deg);
+}
+
+/* User Input Container (Collapsible until Employee clicked) */
+.employee-username-drawer {
+  display: none;
+  animation: drawerSlide 0.3s ease-out;
+}
+
+.employee-username-drawer.show {
+  display: block;
+}
+
+@keyframes drawerSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Holographic Verified Security Pass Card */
+.employee-badge-preview {
+  display: none;
+  background: linear-gradient(135deg, #16202e 0%, #0c121b 100%);
+  border: 1.5px solid var(--neon-cyan, #06b6d4);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.25);
+  position: relative;
+  overflow: hidden;
+  animation: badgeSlideDown 0.35s ease-out;
+}
+
+.employee-badge-preview.show {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.badge-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+  padding-bottom: 0.4rem;
+}
+
+.badge-card-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: var(--industrial-mono);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-switch-badge {
+  background: transparent;
+  border: 1px solid var(--steel-border);
+  color: #94a3b8;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--industrial-mono);
+  transition: all 0.2s;
+}
+
+.btn-switch-badge:hover {
+  background: var(--hazard-yellow);
+  color: #000;
+  border-color: var(--hazard-yellow);
+}
+
+.badge-main-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.badge-photo-slot {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  background: #1c2635;
+  border: 2px solid #06b6d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.35);
+}
+
+.badge-photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-photo-slot svg {
+  width: 32px;
+  height: 32px;
+  fill: #94a3b8;
+}
+
+.badge-emp-name {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.badge-emp-role {
+  font-size: 0.76rem;
+  color: #38bdf8;
+  font-family: var(--industrial-mono);
+  margin-top: 2px;
+}
+
+/* Secondary Info Grid: Branch, Department, Shift, Company */
+.badge-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--industrial-mono);
+}
+
+.badge-info-item .item-label {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.badge-info-item .item-val {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-clearance-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.3rem;
+}
+
+.badge-clearance-tag {
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: var(--safety-green);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: var(--industrial-mono);
+}
+
+/* ==========================================================================
+   Shift Selection Grid (ERPNext Shifts)
+   ========================================================================== */
+.shift-selection-group {
+  margin-bottom: 1.15rem;
+}
+
+.shift-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+}
+
+.shift-radio-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+  background: #090c12;
+  border: 1.5px solid var(--steel-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.shift-radio-card:hover {
+  border-color: var(--steel-light);
+}
+
+.shift-radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shift-radio-card.active {
+  border-color: var(--hazard-yellow);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.shift-tag {
+  font-family: var(--industrial-mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #fff;
+}
+
+.shift-time {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* Quick Badge Tap Testing Chips */
+.quick-badge-section {
+  margin-bottom: 1rem;
+}
+
+.quick-badge-label {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  display: block;
+  font-family: var(--industrial-mono);
+}
+
+.quick-badge-chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.quick-chip {
+  background: #151c27;
+  border: 1px solid var(--steel-border);
+  color: #38bdf8;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--industrial-mono);
+  transition: all 0.2s;
+}
+
+.quick-chip:hover {
+  background: var(--hazard-yellow);
+  color: #000;
+  border-color: var(--hazard-yellow);
+}
+
+/* Live Machinery Ticker */
+.live-machinery-ticker {
+  margin-top: 1.15rem;
+  padding: 7px 9px;
+  background: #090c12;
+  border: 1px solid var(--steel-border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  font-family: var(--industrial-mono);
+}
+
+.machinery-tags {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.mach-tag {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.64rem;
+}
+
+/* Reduced Motion Mode Support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Entrance refinement: a shared floor, warm overhead light and readable forms. */
+[hidden] { display: none !important; }
+.factory-viewport { min-height: 570px; isolation: isolate; background: radial-gradient(ellipse at 22% 0, #64503b55, transparent 65%), linear-gradient(#19232b, #222a30 65%, #191f25); }
+.factory-viewport::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, #ffe6ac0c, transparent 55%); pointer-events: none; z-index: 26; }
+.high-bay-lamp { filter: drop-shadow(0 14px 22px #ffdb8b66); }
+.factory-ground { background: repeating-linear-gradient(173deg, transparent 0 29px, #d2c2a709 30px 31px), linear-gradient(160deg, #424643, #20292f); }
+.pedestrian-walkway-line { transform: perspective(220px) rotateX(35deg) skewX(-16deg); transform-origin: bottom; }
+.middle-machine-bay { transform: skewY(-3deg); opacity: .65; }
+.factory-column { position: absolute; left: 73%; top: 0; bottom: 90px; width: 19px; background: linear-gradient(90deg,#1e2933,#47515b 45%,#202b35 50%); border-left: 2px solid #727d8155; z-index: 4; box-shadow: 8px 4px 18px #0005; }
+.trolley-cart { animation: loadedCart 30s linear infinite; left: 0; z-index: 2; box-shadow: 8px 10px 9px #0005; }
+.trolley-cart::before, .trolley-cart::after { display: none; }
+.trolley-load { position: absolute; left: 5px; bottom: 22px; width: 50px; height: 37px; background: repeating-linear-gradient(90deg,transparent 0 12px,#28333b 13px 17px,transparent 18px 32px),linear-gradient(130deg,#a4aaac,#576774); border: 2px solid #89949a; border-radius: 4px; }
+.trolley-load span { display: block; font: 6px monospace; color: #e6edef; margin-top: 14px; background:#1b2631aa; text-align:center; }
+.cart-wheel { position: absolute; bottom:-5px; width:10px; height:10px; border:2px solid #151c24; border-radius:50%; background:conic-gradient(#71808b 0deg 60deg,#25313c 60deg 180deg,#71808b 180deg 240deg,#25313c 240deg); animation: wheelTurn 1s linear infinite; }
+.wheel-left { left:8px; } .wheel-right { right:8px; }
+@keyframes wheelTurn { to { transform:rotate(360deg); } }
+@keyframes loadedCart { 0%,8% { transform:translateX(-100px); opacity:0; } 10% { opacity:.8; } 65% { transform:translateX(900px); opacity:.8; } 66%,100% { transform:translateX(900px); opacity:0; } }
+.cabin-wall-sign { transform: rotate(-3deg); transition: transform .5s ease; }
+.cabin-wall-sign.straightened { transform: rotate(0); }
+.entrance-gate-checkpoint { left: calc(50% + 37px); bottom:85px; }
+.marcus-stage { left: calc(50% - 160px); bottom:72px; transition:left .48s linear; }
+.marcus-stage.at-scanner { left:calc(50% - 130px); }
+.marcus-svg { transition:transform .35s ease; filter:drop-shadow(5px 9px 7px #0005); }
+.marcus-floor-shadow { bottom:4px; left:58px; transform:skewX(-25deg); width:110px; opacity:.8; }
+/* Turn only the artwork. Dialogue and the contact shadow stay upright. */
+.marcus-stage.pose-privacy-extreme { transform:none; }
+.pose-privacy-extreme .marcus-svg { transform:scaleX(-1); }
+.pose-privacy-extreme .char-head-group { transform:rotate(-16deg); }
+.pose-privacy-extreme .char-pupils { transform:translateY(-2px); }
+.marcus-dialogue-bubble { top:8px; left:50%; white-space:normal; width:230px; max-width:65vw; text-align:center; font-family:var(--sans-font); line-height:1.45; z-index:5; }
+.char-leg-left { transform-origin:85px 202px; }
+.char-leg-right { transform-origin:115px 202px; }
+.char-shin { transform-box:fill-box; transform-origin:50% 0; }
+.char-boot { stroke:#61707d; stroke-width:2.5; }
+.pose-walk .char-leg-left { animation:stepLeft .48s linear; }
+.pose-walk .char-leg-right { animation:stepRight .48s linear; }
+.pose-walk .char-shin { animation:kneeBend .24s 2; }
+.pose-walk .char-arm-left { transform:rotate(-8deg); }
+.pose-walk .char-arm-right { transform:rotate(10deg); }
+@keyframes stepLeft { 0%,50%,100% { transform:rotate(0); } 25% { transform:rotate(12deg) translateY(-2px); } 75% { transform:rotate(-8deg); } }
+@keyframes stepRight { 0%,50%,100% { transform:rotate(0); } 25% { transform:rotate(-8deg); } 75% { transform:rotate(12deg) translateY(-2px); } }
+@keyframes kneeBend { 0%,100% { transform:rotate(0); } 50% { transform:rotate(-8deg); } }
+.pose-tap-scanner .char-arm-right { transform:rotate(-25deg); }
+.pose-tap-scanner .char-forearm-right { transform:rotate(-18deg); }
+.pose-tap-scanner .char-head-group { transform:rotate(7deg); }
+.eyebrow-left, .eyebrow-right { transition:transform .25s ease; transform-box:fill-box; transform-origin:center; }
+.pose-puzzled .eyebrow-right { transform:translateY(-4px) rotate(-12deg); }
+.pose-puzzled .eyebrow-left { transform:rotate(9deg); }
+.pose-welcome .eyebrow-left, .pose-welcome .eyebrow-right { transform:translateY(-1.5px); }
+.pose-pocket .char-arm-right { transform:rotate(18deg); }
+.pose-pocket .char-forearm-right { transform:rotate(30deg); }
+.pose-pocket .char-head-group { transform:rotate(12deg) translateY(2px); }
+.pose-badge-found .char-arm-right { transform:rotate(30deg); }
+.pose-badge-found .char-forearm-right { transform:rotate(95deg); }
+.pose-watch .char-arm-left { transform:rotate(-25deg); }
+.pose-watch .char-forearm-left { transform:rotate(-45deg); }
+.pose-watch .char-head-group { transform:rotate(-10deg) translateY(3px); }
+.pose-helmet .char-arm-right { transform:rotate(-95deg); }
+.pose-helmet .char-forearm-right { transform:rotate(-100deg); }
+.pose-nod .char-head-group, .pose-stamp .char-head-group { animation:supervisorNod .35s ease 2; }
+@keyframes supervisorNod { 50% { transform:translateY(3px) rotate(4deg); } }
+.pose-stamp .char-arm-left { transform:rotate(-15deg); }
+.pose-stamp .char-forearm-right { transform:rotate(85deg); }
+.clipboard-check { opacity:0; transition:opacity .2s; }
+.pose-stamp .clipboard-check, .pose-welcome .clipboard-check { opacity:1; }
+.char-eyelids { animation:naturalBlink 7.7s infinite; }
+@keyframes naturalBlink { 0%,26%,29%,71%,74%,78%,81%,100% { transform:scaleY(0); } 27.5%,72.5%,79.5% { transform:scaleY(1); } }
+@keyframes beaconPulse { from { opacity:.4; } to { opacity:1; } }
+.text-button, .forgot-password-link { font:inherit; color:#7dd3fc; background:none; border:0; cursor:pointer; padding:6px 0; text-decoration:underline; }
+.empty-status { color:#a8b2bf; font-size:.78rem; }
+#password-reset-panel, #otp-panel { display:grid; gap:12px; }
+#password-reset-panel .form-control, #otp-panel .form-control { padding-left:12px; }
+#reset-status, #otp-prompt { font-size:.85rem; color:#cbd5e1; }
+.shift-grid { grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); }
+.shift-radio-card:focus-within, [role="button"]:focus-visible, button:focus-visible, a:focus-visible { outline:2px solid #7dd3fc; outline-offset:4px; }
+.scene-paused *, .scene-paused *::before, .scene-paused *::after { animation-play-state:paused !important; }
+@media(max-width:960px) {
+  .factory-viewport { height:360px; min-height:360px; }
+  .marcus-stage { width:160px; height:248px; bottom:60px; left:calc(50% - 140px); }
+  .marcus-stage.at-scanner { left:calc(50% - 110px); }
+  .marcus-floor-shadow { left:40px; width:90px; }
+  .marcus-dialogue-bubble { top:-25px; }
+  .entrance-gate-checkpoint { left:calc(50% + 24px); bottom:72px; transform:scale(.8); transform-origin:bottom left; }
+  .factory-ground { height:72px; }
+}
+@media(max-width:520px) {
+  .factory-topbar { flex-direction:column; align-items:flex-start; gap:12px; padding:14px 18px; }
+  .plant-identity { min-width:0; }
+  .plant-titles h1 { font-size:.9rem; flex-wrap:wrap; }
+  .plant-live-status { flex-wrap:wrap; gap:10px; }
+  .factory-terminal-panel { padding:24px 18px; }
+  .form-control { font-size:16px; }
+  .live-machinery-ticker { flex-wrap:wrap; gap:8px; }
+  .factory-column { left:85%; }
+  .cabin-wall-sign { left:16px; font-size:.6rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
+/* Let the document itself scroll, including the complete phone scene. */
+html, body { height:auto; min-height:100%; overflow-x:clip; }
+.factory-windows { position:absolute; display:flex; gap:14px; top:120px; left:28%; right:8%; height:115px; opacity:.55; }
+.factory-windows i { flex:1; border:5px solid #27323b; background:repeating-linear-gradient(0deg,transparent 0 32px,#29343d 33px 36px),linear-gradient(135deg,#82908f33,#1b303b); box-shadow:inset 0 0 15px #0005; }
+.production-bay-sign { position:absolute; top:275px; left:28%; color:#c2c5bc66; font:600 22px var(--industrial-mono); letter-spacing:4px; }
+.production-bay-sign span { display:block; font-size:9px; letter-spacing:2px; margin-top:8px; }
+.guarded-machine { position:absolute; bottom:110px; left:56%; width:260px; height:175px; border:3px solid #48525c; border-radius:9px 9px 0 0; background:linear-gradient(130deg,#4e5b63,#293740); box-shadow:12px 8px 15px #0004; opacity:.65; }
+.machine-window { display:flex; align-items:center; justify-content:center; gap:10px; position:absolute; inset:18px 20px 50px; border:5px solid #202d36; background:repeating-linear-gradient(90deg,#617b8633 0 2px,transparent 2px 16px),#17252d; }
+.machine-window i { width:34px; height:34px; border:7px solid #6c7d85; border-radius:50%; background:#25343c; box-shadow:inset 0 0 5px #0008; }
+.guarded-machine>span { position:absolute; bottom:15px; left:20px; font:8px var(--industrial-mono); letter-spacing:2px; color:#acb6b5; }
+.machine-console { position:absolute; right:-18px; bottom:45px; width:35px; height:55px; background:linear-gradient(#3d555e 40%,#28353e 40%); border:4px solid #64727a; transform:skewY(-7deg); }
+.wall-pipe { position:absolute; top:335px; right:12%; width:45%; height:50px; border-top:7px solid #52606855; border-right:7px solid #52606855; border-radius:0 12px 0 0; }
+@media(max-width:960px) {
+ .factory-windows { top:30px; height:65px; }
+ .production-bay-sign { top:115px; left:50%; font-size:12px; letter-spacing:1px; }
+ .production-bay-sign span { font-size:6px; }
+ .guarded-machine { width:160px; height:110px; bottom:90px; }
+ .machine-window { inset:10px 12px 30px; gap:5px; border-width:3px; }
+ .machine-window i { width:22px; height:22px; border-width:4px; }
+ .guarded-machine>span { font-size:6px; bottom:8px; }
+ .wall-pipe { top:170px; }
+ .cabin-wall-sign { top:85px; }
+}
+
+/* A guided entrance: meet the supervisor, identify, verify, then welcome. */
+.entrance-steps { list-style:none; display:flex; gap:8px; margin-bottom:28px; }
+.entrance-steps li { flex:1; padding:10px 8px; border-bottom:2px solid #34424e; color:#788e9e; font:10px var(--industrial-mono); transition:color .25s,border-color .25s; }
+.entrance-steps li span { display:block; margin-top:5px; font:600 12px var(--sans-font); }
+.entrance-steps li.current { color:#e8c081; border-color:#e8c081; }
+#entrance-intro { animation:entranceReveal .4s ease-out; }
+#entrance-intro h3 { font-size:25px; letter-spacing:-.6px; margin:20px 0 10px; }
+#entrance-intro>p { color:#a2b3bf; font-size:13px; line-height:1.7; }
+#entrance-intro .btn-factory-submit { margin-top:24px; text-transform:none; }
+#entrance-intro .entry-hint { font-size:11px; margin-top:12px; color:#8298a7; }
+.entry-pass { width:190px; height:115px; padding:18px; border:1px solid #9c8a6866; border-radius:12px; background:linear-gradient(130deg,#30444e,#18262e); box-shadow:8px 12px 25px #0003; transform:rotate(-5deg); animation:passFloat 5s ease-in-out infinite; }
+.entry-pass>span { display:block; font-size:8px; color:#b9b29c; letter-spacing:2px; }
+.entry-pass strong { display:block; font-size:15px; margin:9px 0; color:#ecd5aa; }
+.entry-pass i { color:#8d9e9d; font-size:20px; }
+@keyframes passFloat { 50% { transform:translateY(-5px) rotate(-3deg); } }
+@keyframes entranceReveal { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+#identity-step, #verification-step { animation:entranceReveal .35s ease-out; }
+#identity-next { text-transform:none; font-size:13px; }
+.identity-summary { display:flex; align-items:center; gap:10px; border:1px solid #455560; background:#1c2933; border-radius:9px; padding:12px; margin-bottom:24px; }
+.identity-summary>div { min-width:0; flex:1; }
+.identity-summary small { display:block; color:#8da2b0; font-size:9px; }
+.identity-summary strong { display:block; color:#d6e3e9; font-size:12px; overflow-wrap:anywhere; }
+.identity-icon { color:#e0bd83; font-size:26px; }
+.identity-summary .text-button { font-size:10px; }
+.welcome-teaser { border-top:1px solid #ffffff10; margin-top:28px; padding-top:18px; }
+.welcome-teaser>span { font-size:9px; letter-spacing:2px; color:#bba781; }
+.welcome-teaser p { font-size:11px; color:#879ba8; line-height:1.7; margin-top:7px; }
+[data-journey="intro"] .marcus-stage { cursor:pointer; }
+[data-journey="intro"] .marcus-floor-shadow { box-shadow:0 0 25px #e6b86b33; }
+[data-journey="intro"] .marcus-stage::after { content:'Click me to sign in →'; position:absolute; bottom:-32px; left:50%; transform:translateX(-50%); padding:6px 10px; border:1px solid #b9a27777; border-radius:20px; white-space:nowrap; background:#17232d; color:#dfc494; font-size:10px; }
+[data-journey="verify"] .marcus-stage:not(.at-scanner) { left:calc(50% - 140px); }
+@media(max-width:960px) { [data-journey="verify"] .marcus-stage:not(.at-scanner) { left:calc(50% - 120px); } }
+@media(prefers-reduced-motion:reduce) { .entry-pass,#entrance-intro,#identity-step,#verification-step { animation:none; } }
+/* Keep footfalls coordinated with the short move to verification. */
+[data-journey="verify"] .marcus-stage:not(.at-scanner) .char-leg-left { animation:stepLeft .48s linear; }
+[data-journey="verify"] .marcus-stage:not(.at-scanner) .char-leg-right { animation:stepRight .48s linear; }
+@media(prefers-reduced-motion:reduce) {
+ [data-journey="verify"] .marcus-stage .char-leg-left, [data-journey="verify"] .marcus-stage .char-leg-right { animation:none; }
+}
+
+/* Verification checkpoint: a teal vest, repositioned reader and a direct password action. */
+#marcusVest stop { transition:stop-color .45s ease; }
+[data-journey="verify"] #marcusVest stop:first-child { stop-color:#21b6b0; }
+[data-journey="verify"] #marcusVest stop:last-child { stop-color:#087f8c; }
+.entrance-gate-checkpoint { transition:left .5s ease,filter .5s ease; }
+[data-journey="verify"] .entrance-gate-checkpoint { left:calc(50% + 75px); filter:drop-shadow(0 0 12px #21b6b022); }
+[data-journey="verify"] .marcus-stage.at-scanner { left:calc(50% - 92px); }
+.scene-password-button { position:absolute; bottom:24px; left:calc(50% - 155px); z-index:35; display:flex; align-items:center; gap:12px; padding:11px 16px; border:1px solid #7ce6dc; border-radius:9px; background:#0b5559; color:#e3fffb; font:600 12px var(--sans-font); cursor:pointer; box-shadow:0 5px 20px #0004; animation:entranceReveal .4s ease-out; }
+.scene-password-button:hover { background:#137278; }
+.scene-password-button:disabled { opacity:.5; cursor:wait; }
+.login-avatar { position:relative; display:grid; place-items:center; width:44px; height:48px; border-radius:9px; overflow:hidden; flex-shrink:0; background:#23404c; color:#a2d9d6; }
+.login-avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.verified-login-avatar { width:70px; height:80px; margin:10px auto 0; font-size:32px; border:2px solid #65cbb4; }
+@media(max-width:960px) {
+ [data-journey="verify"] .entrance-gate-checkpoint { left:calc(50% + 54px); }
+ [data-journey="verify"] .marcus-stage.at-scanner { left:calc(50% - 80px); }
+ .scene-password-button { bottom:14px; left:calc(50% - 120px); padding:8px 12px; font-size:11px; }
+}
+@media(prefers-reduced-motion:reduce) { #marcusVest stop,.entrance-gate-checkpoint { transition:none; } .scene-password-button { animation:none; } }
+
+/* A prominent entrance guide with a clear, keyboard-accessible invitation. */
+[data-journey="intro"] .marcus-stage {width:244px;height:378px;bottom:71px;left:calc(50% - 196px);}
+[data-journey="intro"] .marcus-stage::after {display:none;}
+.scene-meet-marcus {position:absolute;z-index:35;left:calc(50% - 232px);bottom:24px;display:flex;align-items:center;gap:9px;border:1px solid #d4b46f;border-radius:10px;background:#182c35;color:#ffe1a3;padding:10px 13px;font:700 12px var(--sans-font);cursor:pointer;box-shadow:0 0 0 4px #e6b86b12,0 10px 25px #0006;animation:cueBreath 4s ease-in-out infinite;}
+.scene-meet-marcus:hover,.scene-meet-marcus:focus-visible {background:#294650;}
+@keyframes cueBreath {50% {box-shadow:0 0 0 8px #e6b86b18,0 10px 25px #0006;}}
+.scanner-intro-scan .scanner-indicator-light {background:#f8bd55;box-shadow:0 0 16px #ffbd47;animation:introReaderPulse .4s ease-in-out 3;}
+.scanner-intro-scan .scanner-target-pad {animation:introReaderSweep 1.2s ease-out;}
+@keyframes introReaderPulse {50% {opacity:.35;}}
+@keyframes introReaderSweep {50% {box-shadow:0 0 0 13px #f4b84755;}}
+.login-motion-toggle {border:1px solid #566675;border-radius:7px;background:#15232c;color:#d1e1e4;padding:8px 11px;font:600 11px var(--sans-font);cursor:pointer;}
+.login-motion-toggle[aria-pressed="true"] {border-color:#80cab6;color:#baf0df;}
+.login-motion-toggle:disabled {cursor:default;opacity:.8;}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+@media(max-width:960px) {
+ [data-journey="intro"] .marcus-stage {width:178px;height:276px;bottom:59px;left:calc(50% - 150px);}
+ .scene-meet-marcus {left:calc(50% - 145px);bottom:10px;font-size:10px;padding:8px 10px;}
+}
+@media(max-width:430px) {.scene-meet-marcus {left:12px;bottom:8px;}}
+@media(prefers-reduced-motion:reduce) {.scene-meet-marcus,.scanner-intro-scan .scanner-indicator-light,.scanner-intro-scan .scanner-target-pad {animation:none;}}
+/* On phones, the welcome character appears before the form until sign-in starts. */
+@media(max-width:960px) {
+ [data-journey="intro"] .factory-arena {flex-direction:column;}
+}

@@ -1,0 +1,120 @@
+      <div class="marcus-stage pose-wave" id="marcus-supervisor" aria-label="{{ supervisor_label|default('Your My Space guide')|e }}" aria-controls="{{ supervisor_controls|default('welcome-tabs')|e }}" role="button" tabindex="0">
+        <!-- Floor Shadow -->
+        <div class="marcus-floor-shadow"></div>
+
+        <!-- Contextual Dialogue Bubble -->
+        <div class="marcus-dialogue-bubble" id="marcus-dialogue" role="status" aria-live="polite">
+          Good day! Ready for a productive shift?
+        </div>
+
+        <!-- SVG Articulated Character -->
+        <svg class="marcus-svg" viewBox="0 0 200 310" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="marcusHelmet" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#d97706"/>
+            </linearGradient>
+            <linearGradient id="marcusVest" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ea580c"/>
+              <stop offset="100%" stop-color="#c2410c"/>
+            </linearGradient>
+            <linearGradient id="marcusSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#e3b28d"/>
+              <stop offset="100%" stop-color="#ac7457"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Legs & Steel-Toe Work Boots (Separate Thigh, Shin, Boot) -->
+          <g class="char-legs-group">
+            <!-- Left Leg -->
+            <g class="char-leg-left">
+              <rect class="char-thigh" x="76" y="200" width="18" height="42" rx="4" fill="#1e293b"/>
+              <rect class="char-shin" x="77" y="238" width="16" height="42" rx="3" fill="#1e293b"/>
+              <path class="char-boot" d="M72 276 h24 v14 c0 3 -2 6 -6 6 h-16 c-2 0 -4 -2 -4 -5 z" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+            </g>
+            <!-- Right Leg -->
+            <g class="char-leg-right">
+              <rect class="char-thigh" x="106" y="200" width="18" height="42" rx="4" fill="#1e293b"/>
+              <rect class="char-shin" x="107" y="238" width="16" height="42" rx="3" fill="#1e293b"/>
+              <path class="char-boot" d="M104 276 h24 v14 c0 3 -2 6 -6 6 h-16 c-2 0 -4 -2 -4 -5 z" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+            </g>
+          </g>
+
+          <!-- Torso, Work Shirt & High-Vis Vest -->
+          <g class="char-torso-group">
+            <!-- Work Shirt Underlayer -->
+            <rect x="68" y="125" width="64" height="80" rx="8" fill="#334155"/>
+            <!-- High-Vis Orange Vest -->
+            <path d="M70 128 h60 l-5 72 h-50 z" fill="url(#marcusVest)"/>
+            <!-- 3M Reflective Striping -->
+            <rect x="71" y="148" width="58" height="7" fill="#f1f5f9" opacity="0.9"/>
+            <rect x="71" y="170" width="58" height="7" fill="#f1f5f9" opacity="0.9"/>
+            <!-- ID Lanyard around neck -->
+            <path d="M92 124 l8 28 l8 -28" stroke="#0284c7" stroke-width="2.5" fill="none"/>
+            <rect x="94" y="152" width="12" height="18" rx="2" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+            <path d="M77 133 l4 12 M122 155 l-4 11 M80 183 l5 9" stroke="#7c2d12" opacity=".4" fill="none"/>
+            <path d="M100 178 v17" stroke="#fed7aa" opacity=".35"/>
+            <!-- Utility Belt -->
+            <rect x="66" y="196" width="68" height="10" rx="2" fill="#0f172a"/>
+          </g>
+
+          <!-- Left Arm & Hand with Clipboard / Visitor Register -->
+          <g class="char-arm-left">
+            <rect x="52" y="130" width="16" height="38" rx="7" fill="#1e293b"/>
+            <g class="char-forearm-left">
+              <rect x="48" y="162" width="15" height="38" rx="6" fill="#1e293b"/>
+              <circle cx="55" cy="202" r="7" fill="url(#marcusSkin)"/>
+              <rect class="char-watch" x="47" y="185" width="17" height="5" rx="2" fill="#94a3b8"/><!-- Wooden Clipboard -->
+              <rect x="34" y="186" width="26" height="36" rx="3" fill="#78350f" stroke="#451a03" stroke-width="1"/>
+              <rect x="38" y="192" width="18" height="26" fill="#fef3c7"/><path class="clipboard-check" d="M40 205 l5 5 9 -12" stroke="#15803d" stroke-width="2" fill="none"/>
+              <rect x="42" y="184" width="10" height="4" rx="1" fill="#94a3b8"/>
+            </g>
+          </g>
+
+          <!-- Right Arm & Articulated Hand -->
+          <g class="char-arm-right">
+            <rect x="132" y="130" width="16" height="38" rx="7" fill="#1e293b"/>
+            <g class="char-forearm-right">
+              <rect x="137" y="162" width="15" height="38" rx="6" fill="#1e293b"/>
+              <circle cx="144" cy="202" r="7" fill="url(#marcusSkin)"/>
+            </g>
+          </g>
+
+          <!-- Head, Expressive Face, Natural Eyelids & Pupils -->
+          <g class="char-head-group">
+            <rect x="91" y="112" width="18" height="16" rx="3" fill="url(#marcusSkin)"/>
+            <ellipse cx="100" cy="95" rx="23" ry="25" fill="url(#marcusSkin)"/>
+            <!-- Friendly Stubble -->
+            <path d="M86 98 q14 24 28 0 v6 q-14 18 -28 0 z" fill="#b45309" opacity="0.5"/>
+            <!-- Mouth -->
+            <path class="char-mouth" d="M94 105 q6 4 12 0" stroke="#78350f" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+            <!-- Sclera (Eye Whites) -->
+            <ellipse cx="91" cy="92" rx="4.5" ry="5" fill="#fff"/>
+            <ellipse cx="109" cy="92" rx="4.5" ry="5" fill="#fff"/>
+
+            <!-- Movable Pupils (Pupil Micro-movement) -->
+            <g class="char-pupils" id="marcus-pupils">
+              <circle cx="91" cy="92" r="2.2" fill="#0f172a"/>
+              <circle cx="109" cy="92" r="2.2" fill="#0f172a"/>
+            </g>
+
+            <!-- Natural Eyelids (Blinking) -->
+            <g class="char-eyelids">
+              <rect x="85" y="87" width="12" height="10" fill="url(#marcusSkin)"/>
+              <rect x="103" y="87" width="12" height="10" fill="url(#marcusSkin)"/>
+            </g>
+
+            <!-- Eyebrows -->
+            <path class="eyebrow-left" d="M86 85 q5 -3 10 0" stroke="#78350f" stroke-width="2" fill="none"/>
+            <path class="eyebrow-right" d="M104 85 q5 -3 10 0" stroke="#78350f" stroke-width="2" fill="none"/>
+
+            <!-- Hard Hat with Front Peak & Ear Defenders -->
+            <path d="M74 82 q26 -30 52 0 h6 v5 h-64 v-5 z" fill="url(#marcusHelmet)" stroke="#b45309" stroke-width="1.5"/>
+            <rect x="70" y="82" width="60" height="5" rx="2" fill="#f59e0b"/>
+            <path d="M85 76 q12 -10 24 -5" stroke="#fde68a" stroke-width="3" opacity=".65" fill="none"/><!-- Ear Defender Cups -->
+            <rect x="70" y="90" width="5" height="12" rx="2" fill="#334155"/>
+            <rect x="125" y="90" width="5" height="12" rx="2" fill="#334155"/>
+          </g>
+        </svg>
+      </div>

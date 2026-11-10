@@ -7,8 +7,8 @@ import frappe
 from frappe import _
 from frappe.utils import now_datetime, get_system_timezone, strip_html, get_datetime
 from frappe.rate_limiter import rate_limit
-from flow.www.factory_login import sanitize_redirect
-from flow.www.factory_assets import get_factory_assets
+from my_space.preferences import sanitize_redirect, get_theme
+from my_space.site_assets import get_shared_assets
 
 no_cache = True
 
@@ -296,12 +296,12 @@ def apply_expense_claim_action(claim_name=None, action=None, approval_status=Non
 
 def get_context(context):
 	if frappe.session.user == "Guest":
-		frappe.local.flags.redirect_location = "/factory-login?redirect-to=" + quote(sanitize_redirect(frappe.local.request.args.get("redirect-to")), safe="")
+		frappe.local.flags.redirect_location = "/login?redirect-to=" + quote("/welcomes", safe="")
 		raise frappe.Redirect
 	context.supervisor_label = _("Marcus, your welcome guide")
 	context.supervisor_controls = "welcome-tabs"
 	context.no_header = True
-	context.factory_assets = get_factory_assets()
+	context.factory_assets = get_shared_assets()
 	from my_space.approvals import get_assets
 	context.my_space_assets = get_assets()
 	context.my_space_today = frappe.utils.nowdate()
@@ -313,9 +313,9 @@ def get_context(context):
 	context.company = (context.profile["employee"] or {}).get("company") or frappe.db.get_single_value("Global Defaults", "default_company") or _("Factory Operations")
 	context.redirect_to = sanitize_redirect(frappe.local.request.args.get("redirect-to"))
 	context.csrf_token = frappe.sessions.get_csrf_token()
-	theme = frappe.defaults.get_user_default("flow_theme")
+	theme = get_theme()
 	context.flow_theme = theme if theme in ("light", "dark") else "light"
-	palette = frappe.defaults.get_user_default("flow_palette")
+	palette = frappe.defaults.get_user_default("my_space_palette") or frappe.defaults.get_user_default("flow_palette")
 	context.flow_palette = palette if palette in ("default", "blue", "ocean", "spring", "pastel", "violet", "sunset") else "default"
 	return context
 

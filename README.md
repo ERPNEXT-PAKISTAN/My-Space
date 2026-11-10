@@ -54,43 +54,36 @@ These pictures render the app's actual templates, styles, and UI rendering code 
 
 ## Requirements
 
-- A working Frappe / ERPNext v16 bench.
-- The **[`flow` app](https://github.com/ERPNEXT-PAKISTAN/Flow)** installed on the target site. My Space currently reuses its factory login, shared visual assets, supervisor illustration, and personal check-in APIs; `required_apps` declares this dependency. Flow is currently a private repository, so cloning it requires an authorized GitHub account.
+- A working Frappe / ERPNext v16 bench. The declared dependency is `erpnext`.
 - **HRMS** for employee, shift, and attendance features.
 - Appropriate Desk roles and document permissions. Available modules, records, and actions follow the signed-in user's access.
 
+**Flow is not required.** My Space includes its own visual assets, guide illustration, preferences, review code, and personal check-in APIs. Authentication uses the site's normal Frappe login page; My Space does not replace the global login page.
+
 ## Installation
 
-The examples below use `~/frappe-bench` and the site name **`site1.local`**. Use your actual bench directory and existing site name consistently. `site1.local` and `sites1.local` are different names; `/path/to/frappe-bench` is only a placeholder, not a directory to create or copy literally.
+The examples below use `~/frappe-bench` and the site name **`site1.local`**. Use your actual bench directory and existing site name consistently. `site1.local` and `sites1.local` are different names; `/path/to/frappe-bench` is only a placeholder.
 
-With Frappe and ERPNext v16 already installed, fetch and install **Flow before My Space**:
+With Frappe and ERPNext v16 already installed:
 
 ```bash
 cd ~/frappe-bench
 bench --site site1.local backup --with-files
-bench get-app --branch main https://github.com/ERPNEXT-PAKISTAN/Flow.git
-bench --site site1.local install-app flow
 bench get-app --branch main https://github.com/ERPNEXT-PAKISTAN/My-Space.git
 bench --site site1.local install-app my_space
-bench build --app flow
 bench build --app my_space
 bench --site site1.local migrate
 bench --site site1.local clear-cache
 bench --site site1.local clear-website-cache
 bench restart
-```
-
-If an app has already been fetched into this bench, skip its `get-app` command. Authenticate Git on that server with an account authorized to access Flow if cloning the private dependency is denied. Do not paste GitHub tokens into commands or repository URLs.
-
-Verify installation:
-
-```bash
 bench --site site1.local list-apps
 ```
 
-Both `flow` and `my_space` should appear. Open `/welcomes` on your site or select **My Space** on ERPNext Desktop.
+If My Space has already been fetched into `apps/my_space`, skip `get-app` and follow the failed-installation recovery section below to pull the latest code first.
 
-For the employee views, link an active Employee to the user's account, configure its shift, and set **Reports To** on team members. Check-ins record events; finalized Attendance remains subject to HRMS processing and configuration.
+Open `/welcomes` on your site or select **My Space** on ERPNext Desktop. Guests are sent through the site's normal login page and returned to My Space.
+
+For employee views, link an active Employee to the user's account, configure its shift, and set **Reports To** on team members. Check-ins record events; finalized Attendance remains subject to HRMS processing and configuration.
 
 ## Update an already-installed server
 
@@ -110,7 +103,7 @@ bench restart
 bench --site site1.local list-apps
 ```
 
-Preserve any local customizations before pulling. A normal update does not require another `get-app`, `install-app`, or `uninstall-app`. If you are updating Flow as well, update its checkout and rebuild its assets before migrating the site. Refresh the browser with **Ctrl+Shift+R** after the update.
+Preserve any local customizations before pulling. A normal update does not require another `get-app`, `install-app`, or `uninstall-app`. Refresh the browser with **Ctrl+Shift+R** after the update.
 
 An installation still registered as `arabic` needs the coordinated rename migration described below, rather than these normal update commands.
 
@@ -129,19 +122,17 @@ find sites -mindepth 2 -maxdepth 2 -name site_config.json -printf '%h\n'
 
 Use the same existing site name for installation, migration, and cache clearing.
 
-### `InvalidRemoteException` while installing `my_space`
+### `InvalidRemoteException` from an older My Space checkout
 
-If `get-app` and the asset build succeeded but `install-app my_space` fails in `fetch_details_from_tag` / `find_org`, check that **Flow has been fetched into the bench**. With the bare dependency name `flow` missing locally, Frappe tries its default GitHub organizations instead of this project's repository and can raise `InvalidRemoteException`.
-
-For a bench where My Space was already fetched, but Flow is missing, run:
+Earlier releases accidentally declared a dependency on `flow`. A client bench without Flow could then fail in Frappe's `fetch_details_from_tag` / `find_org` dependency lookup. This dependency has been removed. **Do not install Flow to resolve this error.** Pull the current My Space version and retry installation:
 
 ```bash
 cd ~/frappe-bench
 bench --site site1.local backup --with-files
-bench get-app --branch main https://github.com/ERPNEXT-PAKISTAN/Flow.git
-bench --site site1.local install-app flow
+git -C apps/my_space pull --ff-only
+bench pip install -e apps/my_space
+bench --site site1.local clear-cache
 bench --site site1.local install-app my_space
-bench build --app flow
 bench build --app my_space
 bench --site site1.local migrate
 bench --site site1.local clear-cache
@@ -150,7 +141,7 @@ bench restart
 bench --site site1.local list-apps
 ```
 
-Skip fetching Flow if `apps/flow` already exists. If GitHub denies access to Flow, authenticate with an authorized account first. Do not remove the declared dependency just to bypass the error: the app imports and uses Flow at runtime.
+`bench version` shows apps downloaded into the bench; `bench --site site1.local list-apps` shows apps actually installed on that site. Seeing `my_space` only in `bench version` means it still needs `install-app` on the target site.
 
 ## Routes
 
@@ -179,4 +170,4 @@ After changes, rebuild bundled assets where needed, clear the site's cache, and 
 
 ## License
 
-[MIT](license.txt).
+[MIT](license.txt). Shared visual asset origins are noted in [Attribution](docs/ATTRIBUTION.md).
